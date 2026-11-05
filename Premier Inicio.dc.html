@@ -107,11 +107,11 @@ a:hover{color:#22201C}
     <video data-k="h-fondo" data-vid="1" data-desk="assets/fondo-hero-desktop.mp4" muted="" playsinline="" preload="auto" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
     <div data-k="h-dark" style="position:absolute;inset:0;background:#140E07;opacity:0"></div>
     <div data-k="h-arch" style="position:absolute;inset:0;margin:auto;width:100%;height:100%;overflow:hidden;background:#140E07">
-      <img data-k="h-under" src="assets/web/hero-serum.jpg" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">
+      <img data-k="h-under" src="assets/web/serum-hero.jpg" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">
       <div data-k="h-par" style="position:absolute;inset:-2%">
         <video data-k="h-vid" data-vid="1" data-desk="assets/hero-orbita-desktop.mp4" muted="" playsinline="" preload="auto" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
       </div>
-      <img data-k="h-img" src="assets/web/hero-serum.jpg" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0">
+      <img data-k="h-img" src="assets/web/serum-hero.jpg" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0">
     </div>
     <p data-k="h-eyebrow" style="position:absolute;top:13vh;left:0;right:0;margin:0;text-align:center;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#22201C">Colección Advanced Trufas</p>
     <h1 data-k="h-head" aria-label="El lujo de un ritual extraordinario." style="position:absolute;left:5vw;right:5vw;top:50%;transform:translateY(-50%);margin:0;display:flex;align-items:center;justify-content:space-between;gap:24px;font-family:'Bodoni Moda',Georgia,serif;font-weight:400;font-size:clamp(44px,5.4vw,124px);line-height:1.02;letter-spacing:-0.02em;color:#22201C;pointer-events:none">
@@ -130,9 +130,9 @@ a:hover{color:#22201C}
 
 <section id="detalle" data-k="sec-detalle" data-screen-label="02 Exploded product" style="position:relative;height:400vh;background:#140E07">
   <div style="position:sticky;top:0;height:100vh;overflow:hidden;color:#FAF8F4">
-    <img data-k="d-bg" src="assets/web/hero-serum.jpg" alt="" aria-hidden="true" style="position:absolute;left:-8%;top:-8%;width:116%;height:116%;max-width:none;object-fit:cover;filter:blur(40px) brightness(0.62) saturate(1.1);opacity:0;pointer-events:none">
+    <img data-k="d-bg" src="assets/web/serum-hero.jpg" alt="" aria-hidden="true" style="position:absolute;left:-8%;top:-8%;width:116%;height:116%;max-width:none;object-fit:cover;filter:blur(40px) brightness(0.62) saturate(1.1);opacity:0;pointer-events:none">
     <div data-k="d-frame" style="position:absolute;inset:0;margin:auto;width:100%;height:100%;overflow:hidden">
-      <img data-k="d-img" src="assets/web/hero-serum.jpg" alt="Sérum facial Advanced Trufas de AURARIUS Gold Elements sobre mármol, junto a trufas y láminas doradas" style="position:absolute;left:50%;top:50%;height:100vh;width:auto;max-width:none;transform:translate(-50%,-50%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%)">
+      <img data-k="d-img" src="assets/web/serum-hero.jpg" alt="Sérum facial Advanced Trufas de AURARIUS Gold Elements sobre mármol, junto a trufas y láminas doradas" style="position:absolute;left:50%;top:50%;height:100vh;width:auto;max-width:none;transform:translate(-50%,-50%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%)">
     </div>
     <div data-k="d-shade" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(20,14,7,0.7) 0%,rgba(20,14,7,0) 32%,rgba(20,14,7,0) 68%,rgba(20,14,7,0.7) 100%)"></div>
     <p data-k="d-eyebrow" style="position:absolute;top:13vh;left:5vw;margin:0;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#C9AE6A">02 · Detalle</p>
@@ -578,7 +578,7 @@ class Component extends DCLogic {
     const m = this.mobile;
     if (!this.reduced) this.SC.forEach(s => { const el = this.$('sec-' + s); if (el) el.style.height = (m ? this.HM : this.HD)[s] + 'vh'; });
     if (!this.reduced && !m) {
-      this.$$('d-co').forEach(c => { c.style.top = '50%'; if (c.dataset.side === 'r') c.style.left = 'calc(50% + 15vh)'; else c.style.right = 'calc(50% + 15vh)'; });
+      this.$$('d-co').forEach((c, i) => { c.style.top = i === 2 ? '64%' : '50%'; if (c.dataset.side === 'r') c.style.left = 'calc(50% + 19vh)'; else c.style.right = 'calc(50% + 19vh)'; });
     }
     if (!m) return;
     this.css('h-vid', { objectFit: 'cover' });
@@ -718,7 +718,7 @@ class Component extends DCLogic {
   sceneDetalle() {
     const gsap = window.gsap, fr = this.$('d-frame'), img = this.$('d-img'), co = this.$$('d-co');
     const vh = () => innerHeight, Y = (fy, s) => () => -(fy - 0.5) * vh() * s;
-    const S1 = this.mobile ? 1.3 : 1.5, S2 = this.mobile ? 1.45 : 1.7;
+    const S1 = this.mobile ? 1.3 : 1.25, S2 = this.mobile ? 1.45 : 1.4, S3 = this.mobile ? 1.45 : 1.6, F3 = this.mobile ? 0.64 : 0.68;
     gsap.set(img, { xPercent: -50, yPercent: -50, x: 0, y: 0, transformOrigin: '50% 50%' });
     co.forEach(c => { gsap.set(c, { opacity: 0 }); });
     const coIn = c => { const t = gsap.timeline(); t.to(c, { opacity: 1, duration: 0.02 }).fromTo(c.querySelector('[data-k="co-line"]'), { scaleX: 0 }, { scaleX: 1, duration: 0.05 }).fromTo(c.querySelector('[data-k="co-txt"]'), { yPercent: 105 }, { yPercent: 0, duration: 0.05 }, '-=0.03'); return t; };
@@ -726,14 +726,14 @@ class Component extends DCLogic {
     const tl = this.mk('detalle');
     tl.fromTo(fr, { width: () => this.archW(), height: () => this.archH(), borderTopLeftRadius: () => this.archW() / 2, borderTopRightRadius: () => this.archW() / 2 },
       { width: () => innerWidth, height: () => innerHeight, borderTopLeftRadius: 0, borderTopRightRadius: 0, duration: 0.2, ease: 'power2.inOut' }, 0)
-      .fromTo(img, { scale: () => this.archH() / vh(), y: 0 }, { scale: S1, y: Y(0.29, S1), duration: 0.2, ease: 'power2.inOut' }, 0)
+      .fromTo(img, { scale: () => this.archH() / vh(), y: 0 }, { scale: S1, y: Y(0.27, S1), duration: 0.2, ease: 'power2.inOut' }, 0)
       .fromTo(this.$('d-bg'), { opacity: 0 }, { opacity: 1, duration: 0.16, ease: 'power1.inOut' }, 0.04)
       .fromTo(this.$('d-shade'), { opacity: 0 }, { opacity: 1, duration: 0.1 }, 0.1)
       .fromTo(this.$('d-eyebrow'), { opacity: 0 }, { opacity: 1, duration: 0.06 }, 0.12)
       .add(coIn(co[0]), 0.2).add(coOut(co[0]), 0.36)
       .to(img, { scale: S2, y: Y(0.55, S2), duration: 0.12, ease: 'power2.inOut' }, 0.37)
       .add(coIn(co[1]), 0.47).add(coOut(co[1]), 0.6)
-      .to(img, { y: Y(0.735, S2), duration: 0.1, ease: 'power2.inOut' }, 0.6)
+      .to(img, { scale: S3, y: Y(F3, S3), duration: 0.1, ease: 'power2.inOut' }, 0.6)
       .add(coIn(co[2]), 0.68).add(coOut(co[2]), 0.8)
       .to(img, { scale: 1, y: 0, opacity: 0, filter: 'blur(10px)', duration: 0.18 }, 0.82)
       .to(this.$('d-bg'), { opacity: 0, duration: 0.18 }, 0.82)
@@ -950,7 +950,7 @@ class Component extends DCLogic {
     const svg = logo.querySelector('svg');
     if (svg) { svg.style.width = '100%'; svg.style.height = 'auto'; svg.style.display = 'block'; svg.setAttribute('aria-hidden', 'true'); }
     const shapes = svg ? Array.from(svg.querySelectorAll('path,rect')) : [];
-    const tasks = [document.fonts ? document.fonts.ready : Promise.resolve(), this.imgReady('assets/web/hero-serum.jpg'), this.vidReady(this.$('h-vid')), this.vidReady(this.$('h-fondo'))];
+    const tasks = [document.fonts ? document.fonts.ready : Promise.resolve(), this.imgReady('assets/web/serum-hero.jpg'), this.vidReady(this.$('h-vid')), this.vidReady(this.$('h-fondo'))];
     let done = 0; const total = tasks.length;
     const upd = () => { if (pct) pct.textContent = Math.round(done / total * 100) + ' %'; if (bar) bar.style.transform = 'scaleX(' + (done / total) + ')'; };
     upd(); tasks.forEach(t => Promise.resolve(t).then(() => { done++; upd(); }));
