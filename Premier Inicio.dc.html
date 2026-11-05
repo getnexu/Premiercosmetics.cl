@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Premier Cosmetics — Colección Advanced Trufas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&amp;family=Jost:wght@300..600&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<style>
+html,body{margin:0;padding:0;background:#FAF8F4;color:#22201C;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto !important}
+.lenis.lenis-stopped{overflow:hidden}
+a{color:#7E6528;text-decoration:none}
+a:hover{color:#22201C}
+::selection{background:#EAE3D8;color:#22201C}
+:focus-visible{outline:2px solid #B89A50;outline-offset:3px}
+</style>
+</helmet>
+<div ref="{{ rootRef }}" style="position:relative;font-family:'Jost',system-ui,sans-serif;color:#22201C;background:#FAF8F4">
+
+<a href="#coleccion" onClick="{{ go }}" style="position:fixed;left:12px;top:-60px;z-index:95;background:#22201C;color:#FAF8F4;padding:10px 16px;border-radius:999px;font-size:13px" style-focus="top:12px">Saltar a productos</a>
+
+<div data-k="loader" role="status" aria-live="polite" aria-label="Cargando la experiencia Premier" style="position:fixed;inset:0;z-index:70;background:#FAF8F4;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:40px">
+  <div data-k="ld-logo" style="width:min(58vw,360px);aspect-ratio:425/142"></div>
+  <div style="width:min(58vw,360px);display:flex;flex-direction:column;gap:12px">
+    <div style="width:100%;height:1px;background:rgba(34,32,28,0.12);overflow:hidden"><div data-k="ld-bar" style="height:100%;width:100%;background:#B89A50;transform:scaleX(0);transform-origin:left center;transition:transform 0.6s cubic-bezier(.2,.7,.2,1)"></div></div>
+    <div style="display:flex;justify-content:space-between;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#6B665D"><span>Colección Advanced Trufas</span><span data-k="ld-pct"></span></div>
+  </div>
+  <button onClick="{{ skipIntro }}" style="position:absolute;bottom:6vh;left:50%;transform:translateX(-50%);background:none;border:0;border-bottom:1px solid rgba(34,32,28,0.3);padding:6px 0;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:#22201C;cursor:pointer">Saltar introducción</button>
+  <div data-k="ld-slow" style="display:none;position:absolute;bottom:14vh;left:0;right:0;flex-direction:column;align-items:center;gap:12px;font-size:14px;color:#4A463F">
+    <span>La experiencia sigue cargando.</span>
+    <button onClick="{{ continueIntro }}" style="background:#22201C;color:#FAF8F4;border:0;border-radius:999px;padding:12px 24px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer">Continuar</button>
+  </div>
+</div>
+
+<canvas data-k="gl" aria-hidden="true" style="position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:72"></canvas>
+<div data-k="glow" aria-hidden="true" style="position:fixed;left:0;top:0;width:420px;height:420px;margin:-210px 0 0 -210px;border-radius:50%;background:radial-gradient(circle,rgba(201,174,106,0.20) 0%,rgba(201,174,106,0) 62%);pointer-events:none;z-index:73;opacity:0"></div>
+
+<header data-k="nav" style="position:fixed;top:0;left:0;right:0;z-index:80;color:#22201C;transition:color 0.5s ease">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:20px 4vw">
+    <a href="#ritual" onClick="{{ go }}" aria-label="Premier Cosmetics, inicio" style="display:block;color:inherit"><img data-k="nav-logo" src="assets/logo-premier.svg" alt="Premier Cosmetics" style="height:38px;width:auto;display:block;transition:filter 0.5s ease"></a>
+    <sc-if value="{{ wideNav }}" hint-placeholder-val="{{ true }}">
+      <nav aria-label="Principal" style="display:flex;gap:30px;white-space:nowrap;font-size:12px;letter-spacing:0.16em;text-transform:uppercase">
+        <a href="#coleccion" onClick="{{ go }}" style="color:inherit">Productos</a>
+        <a href="#coleccion" onClick="{{ go }}" style="color:inherit">Colecciones</a>
+        <a href="SPA Reserva.dc.html" style="color:inherit">SPA</a>
+        <a href="#premier" onClick="{{ go }}" style="color:inherit">Premier</a>
+        <a href="#tiendas" onClick="{{ go }}" style="color:inherit">Tiendas y retiros</a>
+      </nav>
+    </sc-if>
+    <div style="display:flex;align-items:center;gap:22px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;white-space:nowrap">
+      <sc-if value="{{ wideNav }}" hint-placeholder-val="{{ true }}">
+        <a href="#coleccion" onClick="{{ go }}" style="color:inherit">Buscar</a>
+        <a href="#" onClick="{{ noop }}" style="color:inherit">Cuenta</a>
+      </sc-if>
+      <a href="#" onClick="{{ noop }}" style="color:inherit">Bolsa (0)</a>
+      <sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+        <a data-mag="1" href="SPA Reserva.dc.html" style="color:inherit;border:1px solid currentColor;border-radius:999px;padding:11px 20px">Reservar SPA</a>
+      </sc-if>
+      <sc-if value="{{ compactNav }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMenu }}" aria-expanded="{{ menu }}" style="background:none;border:1px solid currentColor;color:inherit;border-radius:999px;padding:10px 16px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;min-height:44px">Menú</button>
+      </sc-if>
+    </div>
+  </div>
+</header>
+
+<sc-if value="{{ menu }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-label="Menú" style="position:fixed;inset:0;z-index:85;background:#FAF8F4;display:flex;flex-direction:column;padding:96px 7vw 40px;gap:8px;box-sizing:border-box">
+    <button onClick="{{ toggleMenu }}" style="position:absolute;top:20px;right:4vw;background:none;border:1px solid #22201C;border-radius:999px;padding:10px 16px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;min-height:44px;color:#22201C">Cerrar</button>
+    <a href="#coleccion" onClick="{{ go }}" style="font-family:'Bodoni Moda',serif;font-size:40px;color:#22201C;padding:6px 0">Productos</a>
+    <a href="#coleccion" onClick="{{ go }}" style="font-family:'Bodoni Moda',serif;font-size:40px;color:#22201C;padding:6px 0">Colecciones</a>
+    <a href="SPA Reserva.dc.html" style="font-family:'Bodoni Moda',serif;font-size:40px;color:#22201C;padding:6px 0">SPA</a>
+    <a href="#premier" onClick="{{ go }}" style="font-family:'Bodoni Moda',serif;font-size:40px;color:#22201C;padding:6px 0">Premier</a>
+    <a href="#tiendas" onClick="{{ go }}" style="font-family:'Bodoni Moda',serif;font-size:40px;color:#22201C;padding:6px 0">Tiendas y retiros</a>
+    <a href="SPA Reserva.dc.html" style="margin-top:auto;text-align:center;background:#22201C;color:#FAF8F4;border-radius:999px;padding:18px;font-size:13px;letter-spacing:0.18em;text-transform:uppercase">Reservar SPA</a>
+  </div>
+</sc-if>
+
+<sc-if value="{{ desktop }}" hint-placeholder-val="{{ true }}">
+  <nav data-k="rail" aria-label="Capítulos" style="position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:79;display:flex;flex-direction:column;gap:12px;color:#22201C;transition:color 0.5s ease">
+    <a data-k="rail-i" href="#ritual" onClick="{{ go }}" style="display:flex;align-items:center;justify-content:flex-end;gap:10px;color:inherit;font-size:10px;letter-spacing:0.2em;text-transform:uppercase"><span data-k="rail-t" style="opacity:0;transition:opacity 0.4s">Ritual</span><span data-k="rail-b" style="width:14px;height:1px;background:currentColor;opacity:0.4;transition:width 0.4s,opacity 0.4s"></span></a>
+    <a data-k="rail-i" href="#detalle" onClick="{{ go }}" style="display:flex;align-items:center;justify-content:flex-end;gap:10px;color:inherit;font-size:10px;letter-spacing:0.2em;text-transform:uppercase"><span data-k="rail-t" style="opacity:0;transition:opacity 0.4s">Detalle</span><span data-k="rail-b" style="width:14px;height:1px;background:currentColor;opacity:0.4;transition:width 0.4s,opacity 0.4s"></span></a>
+    <a data-k="rail-i" href="#ingredientes" onClick="{{ go }}" style="display:flex;align-items:center;justify-content:flex-end;gap:10px;color:inherit;font-size:10px;letter-spacing:0.2em;text-transform:uppercase"><span data-k="rail-t" style="opacity:0;transition:opacity 0.4s">Ingredientes</span><span data-k="rail-b" style="width:14px;height:1px;background:currentColor;opacity:0.4;transition:width 0.4s,opacity 0.4s"></span></a>
+    <a data-k="rail-i" href="#textura" onClick="{{ go }}" style="display:flex;align-items:center;justify-content:flex-end;gap:10px;color:inherit;font-size:10px;letter-spacing:0.2em;text-transform:uppercase"><span data-k="rail-t" style="opacity:0;transition:opacity 0.4s">Textura</span><span data-k="rail-b" style="width:14px;height:1px;background:currentColor;opacity:0.4;transition:width 0.4s,opacity 0.4s"></span></a>
+    <a data-k="rail-i" href="#coleccion" onClick="{{ go }}" style="display:flex;align-items:center;justify-content:flex-end;gap:10px;color:inherit;font-size:10px;letter-spacing:0.2em;text-transform:uppercase"><span data-k="rail-t" style="opacity:0;transition:opacity 0.4s">Colección</span><span data-k="rail-b" style="width:14px;height:1px;background:currentColor;opacity:0.4;transition:width 0.4s,opacity 0.4s"></span></a>
+    <a data-k="rail-i" href="#editorial" onClick="{{ go }}" style="display:flex;align-items:center;justify-content:flex-end;gap:10px;color:inherit;font-size:10px;letter-spacing:0.2em;text-transform:uppercase"><span data-k="rail-t" style="opacity:0;transition:opacity 0.4s">Ritual</span><span data-k="rail-b" style="width:14px;height:1px;background:currentColor;opacity:0.4;transition:width 0.4s,opacity 0.4s"></span></a>
+    <a data-k="rail-i" href="#premier" onClick="{{ go }}" style="display:flex;align-items:center;justify-content:flex-end;gap:10px;color:inherit;font-size:10px;letter-spacing:0.2em;text-transform:uppercase"><span data-k="rail-t" style="opacity:0;transition:opacity 0.4s">Premier</span><span data-k="rail-b" style="width:14px;height:1px;background:currentColor;opacity:0.4;transition:width 0.4s,opacity 0.4s"></span></a>
+    <a data-k="rail-i" href="#final" onClick="{{ go }}" style="display:flex;align-items:center;justify-content:flex-end;gap:10px;color:inherit;font-size:10px;letter-spacing:0.2em;text-transform:uppercase"><span data-k="rail-t" style="opacity:0;transition:opacity 0.4s">Cierre</span><span data-k="rail-b" style="width:14px;height:1px;background:currentColor;opacity:0.4;transition:width 0.4s,opacity 0.4s"></span></a>
+  </nav>
+</sc-if>
+
+<main>
+
+<section id="ritual" data-k="sec-hero" data-screen-label="01 Immersive hero" style="position:relative;height:300vh;background:#140E07">
+  <div style="position:sticky;top:0;height:100lvh;min-height:100vh;overflow:hidden">
+    <video data-k="h-fondo" data-vid="1" data-desk="assets/fondo-hero-desktop.mp4" muted="" playsinline="" preload="auto" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+    <div data-k="h-dark" style="position:absolute;inset:0;background:#140E07;opacity:0"></div>
+    <div data-k="h-arch" style="position:absolute;inset:0;margin:auto;width:100%;height:100%;overflow:hidden;background:#140E07">
+      <img data-k="h-under" src="assets/web/hero-serum.jpg" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain">
+      <div data-k="h-par" style="position:absolute;inset:-2%">
+        <video data-k="h-vid" data-vid="1" data-desk="assets/hero-orbita-desktop.mp4" muted="" playsinline="" preload="auto" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+      </div>
+      <img data-k="h-img" src="assets/web/hero-serum.jpg" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0">
+    </div>
+    <p data-k="h-eyebrow" style="position:absolute;top:13vh;left:0;right:0;margin:0;text-align:center;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#22201C">Colección Advanced Trufas</p>
+    <h1 data-k="h-head" aria-label="El lujo de un ritual extraordinario." style="position:absolute;left:5vw;right:5vw;top:50%;transform:translateY(-50%);margin:0;display:flex;align-items:center;justify-content:space-between;gap:24px;font-family:'Bodoni Moda',Georgia,serif;font-weight:400;font-size:clamp(44px,5.4vw,124px);line-height:1.02;letter-spacing:-0.02em;color:#22201C;pointer-events:none">
+      <span data-k="h-line" aria-hidden="true" style="display:block;max-width:34vw"><span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="h-w" style="display:inline-block">El</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="h-w" style="display:inline-block">lujo</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="h-w" style="display:inline-block">de</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="h-w" style="display:inline-block">un</span></span></span>
+      <span data-k="h-line" aria-hidden="true" style="display:block;max-width:38vw;text-align:right"><span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="h-w" style="display:inline-block">ritual</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="h-w" style="display:inline-block;font-style:italic">extraordinario.</span></span></span>
+    </h1>
+    <div data-k="h-ctas" style="position:absolute;left:0;right:0;bottom:7vh;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:0 6vw">
+      <a data-mag="1" href="#coleccion" onClick="{{ go }}" style="background:#22201C;color:#FAF8F4;border-radius:999px;padding:17px 30px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;transition:background 0.3s" style-hover="background:#7E6528;color:#FAF8F4">Explorar la colección</a>
+      <a data-mag="1" href="SPA Reserva.dc.html" style="background:rgba(250,248,244,0.9);color:#22201C;border:1px solid rgba(34,32,28,0.2);border-radius:999px;padding:16px 30px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;transition:background 0.3s" style-hover="background:#FFFFFF;color:#22201C">Reservar SPA</a>
+    </div>
+    <sc-if value="{{ review }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;left:4vw;bottom:3vh;z-index:5;max-width:380px;background:#22201C;color:#FAF8F4;font-size:12px;line-height:1.5;padding:10px 14px;border-radius:10px"><strong style="color:#C9AE6A;letter-spacing:0.14em">REVISIÓN · 01 </strong>Texto de trabajo del PRD. Fondo ambiental solo en la apertura y la transición. Entrada temporal tras el loader; la narrativa avanza solo con scroll.</div>
+    </sc-if>
+  </div>
+</section>
+
+<section id="detalle" data-k="sec-detalle" data-screen-label="02 Exploded product" style="position:relative;height:400vh;background:#140E07">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden;color:#FAF8F4">
+    <img data-k="d-bg" src="assets/web/hero-serum.jpg" alt="" aria-hidden="true" style="position:absolute;left:-8%;top:-8%;width:116%;height:116%;max-width:none;object-fit:cover;filter:blur(40px) brightness(0.62) saturate(1.1);opacity:0;pointer-events:none">
+    <div data-k="d-frame" style="position:absolute;inset:0;margin:auto;width:100%;height:100%;overflow:hidden">
+      <img data-k="d-img" src="assets/web/hero-serum.jpg" alt="Sérum facial Advanced Trufas de AURARIUS Gold Elements sobre mármol, junto a trufas y láminas doradas" style="position:absolute;left:50%;top:50%;height:100vh;width:auto;max-width:none;transform:translate(-50%,-50%);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 14%,#000 86%,transparent 100%)">
+    </div>
+    <div data-k="d-shade" style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(20,14,7,0.7) 0%,rgba(20,14,7,0) 32%,rgba(20,14,7,0) 68%,rgba(20,14,7,0.7) 100%)"></div>
+    <p data-k="d-eyebrow" style="position:absolute;top:13vh;left:5vw;margin:0;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#C9AE6A">02 · Detalle</p>
+    <div data-k="d-co" data-side="r" style="position:absolute;top:29%;left:calc(50% + 9vh);display:flex;align-items:center;transform:translateY(-50%)">
+      <span data-k="co-dot" style="width:9px;height:9px;border-radius:50%;border:1px solid #C9AE6A;box-sizing:border-box;flex:none"></span>
+      <span data-k="co-line" style="width:12vw;height:1px;background:#C9AE6A;transform-origin:left center;flex:none"></span>
+      <div style="overflow:hidden;padding:4px 0 4px 20px"><div data-k="co-txt"><p style="margin:0 0 6px;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#C9AE6A">01 — Tapa</p><p style="margin:0;font-family:'Bodoni Moda',serif;font-size:clamp(22px,2vw,34px);line-height:1.1">Acabado dorado estriado</p></div></div>
+    </div>
+    <div data-k="d-co" data-side="l" style="position:absolute;top:55%;right:calc(50% + 9vh);display:flex;flex-direction:row-reverse;align-items:center;transform:translateY(-50%);text-align:right">
+      <span data-k="co-dot" style="width:9px;height:9px;border-radius:50%;border:1px solid #C9AE6A;box-sizing:border-box;flex:none"></span>
+      <span data-k="co-line" style="width:12vw;height:1px;background:#C9AE6A;transform-origin:right center;flex:none"></span>
+      <div style="overflow:hidden;padding:4px 20px 4px 0"><div data-k="co-txt"><p style="margin:0 0 6px;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#C9AE6A">02 — Etiqueta</p><p style="margin:0;font-family:'Bodoni Moda',serif;font-size:clamp(22px,2vw,34px);line-height:1.1">AURARIUS Gold Elements</p><p style="margin:6px 0 0;font-size:13px;color:rgba(250,248,244,0.75)">Advanced Truffles Brightening Face Lift Serum</p></div></div>
+    </div>
+    <div data-k="d-co" data-side="r" style="position:absolute;top:73.5%;left:calc(50% + 9vh);display:flex;align-items:center;transform:translateY(-50%)">
+      <span data-k="co-dot" style="width:9px;height:9px;border-radius:50%;border:1px solid #C9AE6A;box-sizing:border-box;flex:none"></span>
+      <span data-k="co-line" style="width:12vw;height:1px;background:#C9AE6A;transform-origin:left center;flex:none"></span>
+      <div style="overflow:hidden;padding:4px 0 4px 20px"><div data-k="co-txt"><p style="margin:0 0 6px;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#C9AE6A">03 — Contenido</p><p style="margin:0;font-family:'Bodoni Moda',serif;font-size:clamp(22px,2vw,34px);line-height:1.1">50 ml · 1.7 fl oz</p></div></div>
+    </div>
+    <sc-if value="{{ review }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;left:4vw;bottom:3vh;z-index:5;max-width:380px;background:#FAF8F4;color:#22201C;font-size:12px;line-height:1.5;padding:10px 14px;border-radius:10px"><strong style="color:#7E6528;letter-spacing:0.14em">REVISIÓN · 02 </strong>Detalle provisional; despiece pendiente de activos. Se mantiene el recorrido de 400vh; los callouts solo nombran elementos visibles en la foto.</div>
+    </sc-if>
+  </div>
+</section>
+
+<section id="ingredientes" data-k="sec-ingredientes" data-screen-label="03 Ingredient universe" style="position:relative;height:350vh;background:#140E07">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden;color:#FAF8F4">
+    <div data-k="i-frame" style="position:absolute;top:8vh;bottom:6vh;right:8vw;width:48.4vh;overflow:hidden;border-radius:24.2vh 24.2vh 0 0;background:#130D06">
+      <img src="assets/web/coleccion-completa.jpg" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.5">
+      <video data-k="i-vid" data-vid="1" data-lazy="1" data-desk="assets/universo-ingredientes.mp4" muted="" playsinline="" preload="auto" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+      <div data-k="i-grad" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,14,7,0) 30%,rgba(20,14,7,0.92) 78%);opacity:0"></div>
+    </div>
+    <div data-k="i-text" style="position:absolute;left:6vw;top:0;bottom:0;width:min(44vw,700px);display:flex;flex-direction:column;justify-content:center;gap:5vh">
+      <p data-k="i-eyebrow" style="margin:0;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#C9AE6A">03 · Ingredientes</p>
+      <h2 data-k="i-head" aria-label="Descubre el origen de tu ritual" style="margin:0;font-family:'Bodoni Moda',Georgia,serif;font-weight:400;font-size:clamp(40px,4.8vw,96px);line-height:1.02;letter-spacing:-0.015em"><span aria-hidden="true"><span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="i-w" style="display:inline-block">Descubre</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="i-w" style="display:inline-block">el</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="i-w" style="display:inline-block">origen</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="i-w" style="display:inline-block">de</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="i-w" style="display:inline-block">tu</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="i-w" style="display:inline-block;font-style:italic">ritual</span></span></span></h2>
+      <ol style="list-style:none;margin:0;padding:0;display:grid;gap:0">
+        <li data-k="i-card" style="position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;align-items:baseline;padding:16px 0">
+          <span data-k="i-line" style="position:absolute;left:0;right:0;top:0;height:1px;background:rgba(201,174,106,0.55);transform-origin:left center"></span>
+          <span style="font-size:12px;letter-spacing:0.2em;color:#C9AE6A">01</span>
+          <div><p style="margin:0;font-family:'Bodoni Moda',serif;font-size:clamp(22px,2vw,34px);line-height:1.1">Trufa blanca y negra</p><p style="margin:6px 0 0;font-size:14px;color:rgba(250,248,244,0.72)">Infusión de trufa para una piel de aspecto luminoso.</p></div>
+        </li>
+        <li data-k="i-card" style="position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;align-items:baseline;padding:16px 0">
+          <span data-k="i-line" style="position:absolute;left:0;right:0;top:0;height:1px;background:rgba(201,174,106,0.55);transform-origin:left center"></span>
+          <span style="font-size:12px;letter-spacing:0.2em;color:#C9AE6A">02</span>
+          <div><p style="margin:0;font-family:'Bodoni Moda',serif;font-size:clamp(22px,2vw,34px);line-height:1.1">Minerales del Mar Muerto</p><p style="margin:6px 0 0;font-size:14px;color:rgba(250,248,244,0.72)">Gran cantidad de minerales, junto a ingredientes hidratantes, nutritivos y fortalecedores.</p></div>
+        </li>
+        <li data-k="i-card" style="position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;align-items:baseline;padding:16px 0">
+          <span data-k="i-line" style="position:absolute;left:0;right:0;top:0;height:1px;background:rgba(201,174,106,0.55);transform-origin:left center"></span>
+          <span style="font-size:12px;letter-spacing:0.2em;color:#C9AE6A">03</span>
+          <div><p style="margin:0;font-family:'Bodoni Moda',serif;font-size:clamp(22px,2vw,34px);line-height:1.1">Oro 24 quilates</p><p style="margin:6px 0 0;font-size:14px;color:rgba(250,248,244,0.72)">Fórmula fortificada con oro de 24 quilates y un activo antienvejecimiento.</p></div>
+        </li>
+        <li data-k="i-card" style="position:relative;display:grid;grid-template-columns:52px minmax(0,1fr);gap:16px;align-items:baseline;padding:16px 0">
+          <span data-k="i-line" style="position:absolute;left:0;right:0;top:0;height:1px;background:rgba(201,174,106,0.55);transform-origin:left center"></span>
+          <span style="font-size:12px;letter-spacing:0.2em;color:#C9AE6A">04</span>
+          <div><p style="margin:0;font-family:'Bodoni Moda',serif;font-size:clamp(22px,2vw,34px);line-height:1.1">Piedras preciosas</p><p style="margin:6px 0 0;font-size:14px;color:rgba(250,248,244,0.72)">Presentes en todo el tratamiento Advanced Trufas.</p></div>
+        </li>
+      </ol>
+    </div>
+    <sc-if value="{{ review }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;left:4vw;bottom:3vh;z-index:5;max-width:380px;background:#FAF8F4;color:#22201C;font-size:12px;line-height:1.5;padding:10px 14px;border-radius:10px"><strong style="color:#7E6528;letter-spacing:0.14em">REVISIÓN · 03 </strong>Ingredientes y descripciones entregados por Bryan para el tratamiento completo. Validar redacción de «activo antienvejecimiento» con la ficha técnica.</div>
+    </sc-if>
+  </div>
+</section>
+
+<section id="textura" data-k="sec-liquido" data-screen-label="04 Liquid physics" style="position:relative;height:300vh;background:#140E07">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden;color:#FAF8F4">
+    <div data-k="l-frame" style="position:absolute;inset:0;margin:auto;width:56.25vh;height:100vh;overflow:hidden;background:#120800">
+      <img src="assets/web/macro-textura.jpg" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55">
+      <video data-k="l-vid" data-vid="1" data-lazy="1" data-desk="assets/fisica-liquidos.mp4" muted="" playsinline="" preload="auto" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+    </div>
+    <p data-k="l-eyebrow" style="position:absolute;top:13vh;left:5vw;margin:0;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#C9AE6A">04 · Textura</p>
+    <p data-k="l-left" style="position:absolute;left:5vw;top:calc(50% - 0.6em);margin:0;font-family:'Bodoni Moda',serif;font-size:clamp(48px,6.4vw,140px);line-height:1.1;letter-spacing:-0.02em">Textura</p>
+    <p data-k="l-right" style="position:absolute;right:5vw;top:calc(50% - 0.6em);margin:0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(48px,6.4vw,140px);line-height:1.1;letter-spacing:-0.02em;text-align:right">en movimiento</p>
+    <div data-k="l-wipe" aria-hidden="true" style="position:absolute;inset:0;background:#FAF8F4;color:#22201C;clip-path:inset(100% 0% 0% 0%)">
+      <p data-k="c-eyebrow" style="position:absolute;top:13vh;left:0;right:0;margin:0;text-align:center;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#7E6528">05 · Colección</p>
+      <p data-k="c-title" style="position:absolute;left:5vw;right:5vw;top:calc(50% - 0.6em);margin:0;display:flex;justify-content:space-between;font-family:'Bodoni Moda',serif;font-size:clamp(48px,6.2vw,140px);line-height:1.1;letter-spacing:-0.02em"><span>Advanced</span><span style="font-style:italic">Trufas</span></p>
+    </div>
+    <sc-if value="{{ review }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;left:4vw;bottom:3vh;z-index:5;max-width:380px;background:#FAF8F4;color:#22201C;font-size:12px;line-height:1.5;padding:10px 14px;border-radius:10px"><strong style="color:#7E6528;letter-spacing:0.14em">REVISIÓN · 04 </strong>Transición por composición y disolución; el video no muestra un envase emergiendo. Texto de trabajo «Textura en movimiento» por aprobar.</div>
+    </sc-if>
+  </div>
+</section>
+
+<section id="coleccion" data-k="sec-coleccion" data-screen-label="05 Product showcase" style="position:relative;height:600vh;background:#FAF8F4">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden">
+    <div data-k="c-intro" style="position:absolute;inset:0;visibility:hidden">
+      <div data-k="c-arch" style="position:absolute;inset:0;margin:auto;width:42vh;height:76vh;border-radius:21vh 21vh 0 0;overflow:hidden;background:#EAE3D8">
+        <img src="assets/web/coleccion-completa.jpg" alt="" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <video data-k="c-vid" data-vid="1" data-lazy="1" data-desk="assets/coleccion-completa.mp4" muted="" playsinline="" preload="auto" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+      </div>
+      <p data-k="c-eyebrow" style="position:absolute;top:13vh;left:0;right:0;margin:0;text-align:center;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#7E6528">05 · Colección</p>
+      <h2 data-k="c-title" aria-label="Colección Advanced Trufas" style="position:absolute;left:5vw;right:5vw;top:calc(50% - 0.6em);margin:0;display:flex;justify-content:space-between;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(48px,6.2vw,140px);line-height:1.1;letter-spacing:-0.02em"><span aria-hidden="true">Advanced</span><span aria-hidden="true" style="font-style:italic">Trufas</span></h2>
+    </div>
+
+    <div data-k="c-car" style="position:absolute;inset:0">
+      <div data-k="c-stage" style="position:absolute;top:0;bottom:0;left:38vw;right:0;perspective:1400px">
+        <a data-k="c-card" href="Producto.dc.html?p=serum-facial" aria-label="Sérum facial Advanced Trufas, ver producto" style="position:absolute;left:50%;top:50%;width:46vh;height:62vh;margin-left:-23vh;margin-top:-31vh;border-radius:23vh 23vh 0 0;overflow:hidden;background:#EAE3D8;box-shadow:0 50px 90px -50px rgba(34,32,28,0.55)">
+          <img src="assets/web/hero-serum.jpg" alt="Sérum facial Advanced Trufas" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 55%">
+        </a>
+        <a data-k="c-card" href="Producto.dc.html?p=serum-ojos" aria-label="Sérum de ojos Advanced Trufas, ver producto" style="position:absolute;left:50%;top:50%;width:46vh;height:62vh;margin-left:-23vh;margin-top:-31vh;border-radius:23vh 23vh 0 0;overflow:hidden;background:#EAE3D8;box-shadow:0 50px 90px -50px rgba(34,32,28,0.55)">
+          <img src="assets/web/coleccion-completa.jpg" alt="Sérum de ojos Advanced Trufas" style="position:absolute;width:260%;height:auto;max-width:none;left:-104.7%;top:-112.5%">
+        </a>
+        <a data-k="c-card" href="Producto.dc.html?p=crema-facial" aria-label="Crema facial Advanced Trufas, ver producto" style="position:absolute;left:50%;top:50%;width:46vh;height:62vh;margin-left:-23vh;margin-top:-31vh;border-radius:23vh 23vh 0 0;overflow:hidden;background:#EAE3D8;box-shadow:0 50px 90px -50px rgba(34,32,28,0.55)">
+          <img src="assets/web/coleccion-completa.jpg" alt="Crema facial Advanced Trufas" style="position:absolute;width:290%;height:auto;max-width:none;left:-0.75%;top:-158.3%">
+        </a>
+        <a data-k="c-card" href="Producto.dc.html?p=mascarilla-termal" aria-label="Mascarilla termal Advanced Trufas, ver producto" style="position:absolute;left:50%;top:50%;width:46vh;height:62vh;margin-left:-23vh;margin-top:-31vh;border-radius:23vh 23vh 0 0;overflow:hidden;background:#EAE3D8;box-shadow:0 50px 90px -50px rgba(34,32,28,0.55)">
+          <img src="assets/web/macro-textura.jpg" alt="Mascarilla termal Advanced Trufas abierta junto a su textura" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%">
+        </a>
+      </div>
+
+      <div data-k="c-info" style="position:absolute;left:6vw;top:0;bottom:0;width:min(30vw,500px);display:flex;flex-direction:column;justify-content:center;gap:22px">
+        <p style="margin:0;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#7E6528">01 / 04 · Advanced Trufas</p>
+        <h3 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(40px,4.4vw,92px);line-height:1;letter-spacing:-0.02em">Sérum <em>facial</em></h3>
+        <p style="margin:0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:17px;color:#4A463F">Advanced Truffles Brightening Face Lift Serum</p>
+        <dl style="margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 24px;font-size:14px;padding:18px 0;border-top:1px solid rgba(34,32,28,0.14);border-bottom:1px solid rgba(34,32,28,0.14)">
+          <dt style="color:#6B665D">Contenido</dt><dd style="margin:0">50 ml</dd>
+          <dt style="color:#6B665D">Ingredientes</dt><dd style="margin:0">Trufa blanca y negra · Minerales del Mar Muerto · Oro 24 quilates · Piedras preciosas</dd>
+          <dt style="color:#6B665D">Precio</dt><dd style="margin:0;font-family:'Bodoni Moda',serif;font-size:20px">$549.990</dd>
+        </dl>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><a data-mag="1" href="Producto.dc.html?p=serum-facial" style="background:#22201C;color:#FAF8F4;border-radius:999px;padding:16px 28px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase" style-hover="background:#7E6528;color:#FAF8F4">Ver producto</a></div>
+      </div>
+      <div data-k="c-info" style="position:absolute;left:6vw;top:0;bottom:0;width:min(30vw,500px);display:flex;flex-direction:column;justify-content:center;gap:22px;visibility:hidden;opacity:0">
+        <p style="margin:0;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#7E6528">02 / 04 · Advanced Trufas</p>
+        <h3 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(40px,4.4vw,92px);line-height:1;letter-spacing:-0.02em">Sérum de <em>ojos</em></h3>
+        <p style="margin:0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:17px;color:#4A463F">Advanced Truffles Brightening Eye Serum</p>
+        <dl style="margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 24px;font-size:14px;padding:18px 0;border-top:1px solid rgba(34,32,28,0.14);border-bottom:1px solid rgba(34,32,28,0.14)">
+          <dt style="color:#6B665D">Contenido</dt><dd style="margin:0">35 ml</dd>
+          <dt style="color:#6B665D">Ingredientes</dt><dd style="margin:0">Trufa blanca y negra · Minerales del Mar Muerto · Oro 24 quilates · Piedras preciosas</dd>
+          <dt style="color:#6B665D">Precio</dt><dd style="margin:0;font-family:'Bodoni Moda',serif;font-size:20px">$299.990</dd>
+        </dl>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><a data-mag="1" href="Producto.dc.html?p=serum-ojos" style="background:#22201C;color:#FAF8F4;border-radius:999px;padding:16px 28px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase" style-hover="background:#7E6528;color:#FAF8F4">Ver producto</a></div>
+      </div>
+      <div data-k="c-info" style="position:absolute;left:6vw;top:0;bottom:0;width:min(30vw,500px);display:flex;flex-direction:column;justify-content:center;gap:22px;visibility:hidden;opacity:0">
+        <p style="margin:0;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#7E6528">03 / 04 · Advanced Trufas</p>
+        <h3 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(40px,4.4vw,92px);line-height:1;letter-spacing:-0.02em">Crema <em>facial</em></h3>
+        <p style="margin:0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:17px;color:#4A463F">Advanced Truffles Brightening Face-lift Cream</p>
+        <dl style="margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 24px;font-size:14px;padding:18px 0;border-top:1px solid rgba(34,32,28,0.14);border-bottom:1px solid rgba(34,32,28,0.14)">
+          <dt style="color:#6B665D">Contenido</dt><dd style="margin:0">60 ml</dd>
+          <dt style="color:#6B665D">Ingredientes</dt><dd style="margin:0">Trufa blanca y negra · Minerales del Mar Muerto · Oro 24 quilates · Piedras preciosas</dd>
+          <dt style="color:#6B665D">Precio</dt><dd style="margin:0;font-family:'Bodoni Moda',serif;font-size:20px">$549.990</dd>
+        </dl>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><a data-mag="1" href="Producto.dc.html?p=crema-facial" style="background:#22201C;color:#FAF8F4;border-radius:999px;padding:16px 28px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase" style-hover="background:#7E6528;color:#FAF8F4">Ver producto</a></div>
+      </div>
+      <div data-k="c-info" style="position:absolute;left:6vw;top:0;bottom:0;width:min(30vw,500px);display:flex;flex-direction:column;justify-content:center;gap:22px;visibility:hidden;opacity:0">
+        <p style="margin:0;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#7E6528">04 / 04 · Advanced Trufas</p>
+        <h3 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(40px,4.4vw,92px);line-height:1;letter-spacing:-0.02em">Mascarilla <em>termal</em></h3>
+        <p style="margin:0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:17px;color:#4A463F">Mascarilla termal iluminadora · Advanced Truffles Brightening Thermal Mask</p>
+        <dl style="margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 24px;font-size:14px;padding:18px 0;border-top:1px solid rgba(34,32,28,0.14);border-bottom:1px solid rgba(34,32,28,0.14)">
+          <dt style="color:#6B665D">Contenido</dt><dd style="margin:0">60 ml</dd>
+          <dt style="color:#6B665D">Ingredientes</dt><dd style="margin:0">Trufa blanca y negra · Minerales del Mar Muerto · Oro 24 quilates · Piedras preciosas</dd>
+          <dt style="color:#6B665D">Precio</dt><dd style="margin:0;font-family:'Bodoni Moda',serif;font-size:20px">$549.990</dd>
+        </dl>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><a data-mag="1" href="Producto.dc.html?p=mascarilla-termal" style="background:#22201C;color:#FAF8F4;border-radius:999px;padding:16px 28px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase" style-hover="background:#7E6528;color:#FAF8F4">Ver producto</a></div>
+      </div>
+
+      <div data-k="c-tabs" role="group" aria-label="Productos de la colección" style="position:absolute;left:6vw;bottom:6vh;display:flex;gap:6px;flex-wrap:wrap">
+        <button data-k="c-tab" data-i="0" onClick="{{ pickProduct }}" style="background:#22201C;color:#FAF8F4;border:1px solid #22201C;border-radius:999px;padding:9px 16px;min-height:40px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer">Sérum facial</button>
+        <button data-k="c-tab" data-i="1" onClick="{{ pickProduct }}" style="background:transparent;color:#22201C;border:1px solid rgba(34,32,28,0.25);border-radius:999px;padding:9px 16px;min-height:40px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer">Sérum de ojos</button>
+        <button data-k="c-tab" data-i="2" onClick="{{ pickProduct }}" style="background:transparent;color:#22201C;border:1px solid rgba(34,32,28,0.25);border-radius:999px;padding:9px 16px;min-height:40px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer">Crema facial</button>
+        <button data-k="c-tab" data-i="3" onClick="{{ pickProduct }}" style="background:transparent;color:#22201C;border:1px solid rgba(34,32,28,0.25);border-radius:999px;padding:9px 16px;min-height:40px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer">Mascarilla termal</button>
+      </div>
+    </div>
+
+    <div data-k="c-outro" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:6vw;padding:0 6vw;box-sizing:border-box;visibility:hidden;opacity:0">
+      <div data-k="c-oarch" style="flex:none;width:38vh;height:68vh;border-radius:19vh 19vh 0 0;overflow:hidden;background:#EAE3D8"><img src="assets/web/coleccion-completa.jpg" alt="Los cuatro productos de la colección Advanced Trufas sobre mármol" style="width:100%;height:100%;object-fit:cover"></div>
+      <div style="display:flex;flex-direction:column;gap:22px;max-width:520px">
+        <p style="margin:0;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#7E6528">Advanced Trufas</p>
+        <h3 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(38px,4.2vw,84px);line-height:1;letter-spacing:-0.02em">La colección <em>completa</em></h3>
+        <p style="margin:0;font-size:15px;line-height:1.6;color:#4A463F">Sérum facial · Sérum de ojos · Crema facial · Mascarilla termal iluminadora</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap"><a data-mag="1" href="Producto.dc.html?p=serum-facial" style="background:#22201C;color:#FAF8F4;border-radius:999px;padding:16px 28px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase" style-hover="background:#7E6528;color:#FAF8F4">Ver los productos</a></div>
+      </div>
+    </div>
+    <sc-if value="{{ review }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;right:4vw;bottom:3vh;z-index:5;max-width:380px;background:#22201C;color:#FAF8F4;font-size:12px;line-height:1.5;padding:10px 14px;border-radius:10px"><strong style="color:#C9AE6A;letter-spacing:0.14em">REVISIÓN · 05 </strong>Sérum de ojos y crema: recortes de la foto de conjunto (faltan fotos individuales). La foto muestra «30 ML» en el sérum de ojos; Bryan indica 35 ml. Precios entregados por Bryan; stock pendiente del catálogo.</div>
+    </sc-if>
+  </div>
+</section>
+
+<section id="editorial" data-k="sec-editorial" data-screen-label="06 Lifestyle editorial" style="position:relative;height:200vh;background:#FAF8F4">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden">
+    <div data-k="e-wrap" style="position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:5vw;padding:13vh 6vw 7vh;box-sizing:border-box;align-items:stretch">
+      <div data-k="e-a" style="position:relative;overflow:hidden;border-radius:2px;background:#EAE3D8">
+        <div data-k="e-a-par" style="position:absolute;inset:-3%"><img data-k="e-a-img" src="assets/web/flat-lay-editorial.jpg" alt="Composición de la colección Advanced Trufas sobre mármol con seda negra, trufas y láminas doradas" style="width:100%;height:100%;object-fit:cover;object-position:50% 52%"></div>
+        <sc-if value="{{ review }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;left:16px;top:16px;max-width:300px;background:#22201C;color:#FAF8F4;font-size:12px;line-height:1.5;padding:10px 14px;border-radius:10px"><strong style="color:#C9AE6A;letter-spacing:0.14em">REEMPLAZAR · </strong>Etiquetas deformadas por la generación de la imagen. Usar solo en el prototipo.</div>
+        </sc-if>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:3.5vh;min-width:0">
+        <div data-k="e-b" style="align-self:flex-end;width:min(13vw,240px);aspect-ratio:3/4;overflow:hidden;position:relative;background:#EAE3D8">
+          <div data-k="e-b-par" style="position:absolute;inset:-5%"><img src="assets/web/macro-textura.jpg" alt="Textura de la mascarilla termal Advanced Trufas" style="width:100%;height:100%;object-fit:cover"></div>
+        </div>
+        <p style="margin:0;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#7E6528">06 · Ritual</p>
+        <h2 data-k="e-head" aria-label="Un momento para ti." style="margin:0;font-family:'Bodoni Moda',Georgia,serif;font-weight:400;font-size:clamp(52px,6.6vw,148px);line-height:0.98;letter-spacing:-0.025em"><span aria-hidden="true"><span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="e-w" style="display:inline-block">Un</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="e-w" style="display:inline-block">momento</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="e-w" style="display:inline-block;font-style:italic">para</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="e-w" style="display:inline-block;font-style:italic">ti.</span></span></span></h2>
+        <p data-k="e-copy" style="margin:0;max-width:36ch;font-size:16px;line-height:1.65;color:#4A463F;text-wrap:pretty">Cuatro pasos de la colección Advanced Trufas: sérum facial, sérum de ojos, crema facial y mascarilla termal.</p>
+      </div>
+    </div>
+    <sc-if value="{{ review }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;right:4vw;top:13vh;z-index:5;max-width:320px;background:#22201C;color:#FAF8F4;font-size:12px;line-height:1.5;padding:10px 14px;border-radius:10px"><strong style="color:#C9AE6A;letter-spacing:0.14em">REVISIÓN · 06 </strong>Sustitución provisional: no hay fotos lifestyle reales. Espacio reservado para lifestyle autorizado. La textura se publica solo tras validarla.</div>
+    </sc-if>
+  </div>
+</section>
+
+<section id="premier" data-k="sec-premier" data-screen-label="07 Por qué Premier" style="position:relative;height:180vh;background:#EAE3D8">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden">
+    <img src="assets/web/macro-textura.jpg" alt="" aria-hidden="true" style="position:absolute;left:-5%;top:-5%;width:110%;height:110%;object-fit:cover;filter:blur(48px) saturate(0.8);opacity:0.5">
+    <div style="position:absolute;inset:0;background:rgba(250,248,244,0.5)"></div>
+    <div data-k="p-wrap" style="position:relative;height:100%;box-sizing:border-box;padding:15vh 6vw 8vh;display:flex;flex-direction:column;justify-content:center;gap:6vh">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap">
+        <div>
+          <p style="margin:0 0 18px;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#7E6528">07 · Premier</p>
+          <h2 data-k="p-head" aria-label="Por qué Premier" style="margin:0;font-family:'Bodoni Moda',Georgia,serif;font-weight:400;font-size:clamp(44px,5.6vw,120px);line-height:1;letter-spacing:-0.02em"><span aria-hidden="true"><span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="p-w" style="display:inline-block">Por</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="p-w" style="display:inline-block">qué</span></span> <span style="display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:0.06em"><span data-k="p-w" style="display:inline-block;font-style:italic">Premier</span></span></span></h2>
+        </div>
+        <a data-mag="1" href="SPA Reserva.dc.html" style="background:#22201C;color:#FAF8F4;border-radius:999px;padding:17px 30px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase" style-hover="background:#7E6528;color:#FAF8F4">Reservar SPA</a>
+      </div>
+      <div data-k="p-grid" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px">
+        <div data-k="p-card"><div data-k="p-in" style="height:100%;box-sizing:border-box;border-radius:28px;background:rgba(255,255,255,0.45);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,0.75);padding:30px;min-height:320px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;transition:box-shadow 0.5s" style-hover="box-shadow:0 40px 70px -40px rgba(34,32,28,0.45)">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#7E6528" stroke-width="1" aria-hidden="true"><circle data-k="p-ico" cx="17" cy="22" r="11" pathLength="100" stroke-dasharray="100"></circle><circle data-k="p-ico" cx="27" cy="22" r="11" pathLength="100" stroke-dasharray="100"></circle></svg>
+          <div><h3 style="margin:0 0 10px;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(24px,1.9vw,32px);line-height:1.1">Asesoría</h3><p style="margin:0;font-size:15px;line-height:1.55;color:#4A463F">Te orientamos para elegir el ritual adecuado para tu piel.</p></div>
+        </div></div>
+        <div data-k="p-card"><div data-k="p-in" style="height:100%;box-sizing:border-box;border-radius:28px;background:rgba(255,255,255,0.45);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,0.75);padding:30px;min-height:320px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;transition:box-shadow 0.5s" style-hover="box-shadow:0 40px 70px -40px rgba(34,32,28,0.45)">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#7E6528" stroke-width="1" aria-hidden="true"><circle data-k="p-ico" cx="22" cy="22" r="16" pathLength="100" stroke-dasharray="100"></circle><circle data-k="p-ico" cx="22" cy="22" r="8" pathLength="100" stroke-dasharray="100"></circle></svg>
+          <div><h3 style="margin:0 0 10px;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(24px,1.9vw,32px);line-height:1.1">Rituales de cuidado</h3><p style="margin:0;font-size:15px;line-height:1.55;color:#4A463F">Cuatro pasos Advanced Trufas: sérum facial, sérum de ojos, crema y mascarilla termal.</p></div>
+        </div></div>
+        <div data-k="p-card"><div data-k="p-in" style="height:100%;box-sizing:border-box;border-radius:28px;background:rgba(255,255,255,0.45);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,0.75);padding:30px;min-height:320px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;transition:box-shadow 0.5s" style-hover="box-shadow:0 40px 70px -40px rgba(34,32,28,0.45)">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#7E6528" stroke-width="1" aria-hidden="true"><rect data-k="p-ico" x="8" y="14" width="28" height="22" pathLength="100" stroke-dasharray="100"></rect><path data-k="p-ico" d="M16 14 V10 H28 V14" pathLength="100" stroke-dasharray="100"></path></svg>
+          <div><h3 style="margin:0 0 10px;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(24px,1.9vw,32px);line-height:1.1">Compra online</h3><p style="margin:0;font-size:15px;line-height:1.55;color:#4A463F">Despacho a todo Chile o retiro gratuito en sede SPA, Costanera Center o Parque Arauco.</p></div>
+        </div></div>
+        <div data-k="p-card"><div data-k="p-in" style="height:100%;box-sizing:border-box;border-radius:28px;background:rgba(255,255,255,0.45);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,0.75);padding:30px;min-height:320px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;transition:box-shadow 0.5s" style-hover="box-shadow:0 40px 70px -40px rgba(34,32,28,0.45)">
+          <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="#7E6528" stroke-width="1" aria-hidden="true"><path data-k="p-ico" d="M10 38 V22 A12 12 0 0 1 34 22 V38" pathLength="100" stroke-dasharray="100"></path><path data-k="p-ico" d="M6 38 H38" pathLength="100" stroke-dasharray="100"></path></svg>
+          <div><h3 style="margin:0 0 10px;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(24px,1.9vw,32px);line-height:1.1">Experiencia SPA</h3><p style="margin:0 0 14px;font-size:15px;line-height:1.55;color:#4A463F">Sesiones de 45 minutos. Reserva en línea con al menos 48 horas de anticipación.</p><a href="SPA Reserva.dc.html" style="font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#7E6528;border-bottom:1px solid currentColor;padding-bottom:3px">Ver horarios</a></div>
+        </div></div>
+      </div>
+    </div>
+    <sc-if value="{{ review }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;left:4vw;bottom:3vh;z-index:5;max-width:380px;background:#22201C;color:#FAF8F4;font-size:12px;line-height:1.5;padding:10px 14px;border-radius:10px"><strong style="color:#C9AE6A;letter-spacing:0.14em">REVISIÓN · 07 </strong>Beneficios propuestos por el PRD, por validar. «Asesoría» requiere confirmar cómo se ofrece. Sin sellos ni cifras.</div>
+    </sc-if>
+  </div>
+</section>
+
+<sc-if value="{{ review }}" hint-placeholder-val="{{ false }}">
+  <section id="testimonios" data-screen-label="08 Testimonials" style="position:relative;min-height:60vh;background:#FAF8F4;display:flex;align-items:center;justify-content:center;padding:10vh 6vw;box-sizing:border-box;background-image:repeating-linear-gradient(135deg,rgba(184,154,80,0.08) 0 1px,transparent 1px 14px)">
+    <div style="max-width:620px;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center">
+      <p style="margin:0;font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#7E6528">08 · Testimonios — oculta al público</p>
+      <p style="margin:0;font-family:'Bodoni Moda',serif;font-size:clamp(28px,3vw,48px);line-height:1.15">Sin testimonios autorizados no se publica este capítulo.</p>
+      <p style="margin:0;font-size:14px;line-height:1.6;color:#4A463F;font-family:ui-monospace,Menlo,monospace">Previsto: scroll horizontal fijado de 250vh, tarjetas con velocidades distintas y comillas editoriales. Se activa al recibir citas, nombres y permisos verificados.</p>
+    </div>
+  </section>
+</sc-if>
+
+<section id="final" data-k="sec-final" data-screen-label="09 Final product" style="position:relative;height:250vh;background:#F3EEE5">
+  <div style="position:sticky;top:0;height:100vh;overflow:hidden">
+    <div data-k="f-arch" style="position:absolute;left:0;right:0;margin:0 auto;top:11vh;width:min(62vh,88vw);height:58vh;border-radius:31vh 31vh 0 0;overflow:hidden;background:#140E07">
+      <img data-k="f-img" src="assets/web/coleccion-completa.jpg" alt="Colección completa Advanced Truffles" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 54%">
+    </div>
+    <h2 data-k="f-head" aria-label="Descubre tu próximo ritual" style="position:absolute;left:5vw;right:5vw;top:73vh;margin:0;text-align:center;font-family:'Bodoni Moda',Georgia,serif;font-weight:400;font-size:clamp(36px,4.6vw,100px);line-height:1.04;letter-spacing:-0.02em"><span data-k="f-src" aria-hidden="true">Descubre tu próximo <em>ritual</em></span><span data-k="f-chars" aria-hidden="true"></span></h2>
+    <div data-k="f-ctas" style="position:absolute;left:0;right:0;bottom:6vh;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:0 6vw">
+      <a data-mag="1" href="#coleccion" onClick="{{ go }}" style="background:#22201C;color:#FAF8F4;border-radius:999px;padding:17px 30px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase" style-hover="background:#7E6528;color:#FAF8F4">Comprar colección Trufas</a>
+      <a data-mag="1" href="SPA Reserva.dc.html" style="color:#22201C;border:1px solid rgba(34,32,28,0.3);border-radius:999px;padding:16px 30px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase" style-hover="background:#FFFFFF;color:#22201C">Reservar SPA</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer id="tiendas" style="position:relative;background:#22201C;color:#EAE3D8;padding:12vh 6vw 5vh">
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:48px 32px">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <img src="assets/logo-premier.svg" alt="Premier Cosmetics" style="height:44px;width:auto;align-self:flex-start">
+      <p style="margin:0;font-size:14px;line-height:1.6;color:rgba(234,227,216,0.75);max-width:30ch">Cosmética de lujo y SPA en Santiago de Chile.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;font-size:14px">
+      <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#C9AE6A">Tienda</p>
+      <a href="#coleccion" onClick="{{ go }}" style="color:#EAE3D8">Colección Advanced Trufas</a>
+      <a href="Producto.dc.html?p=serum-facial" style="color:#EAE3D8">Productos</a>
+      <a href="#" onClick="{{ noop }}" style="color:#EAE3D8">Envíos y retiros</a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;font-size:14px">
+      <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#C9AE6A">SPA</p>
+      <a href="SPA Reserva.dc.html" style="color:#EAE3D8">Reservar sesión</a>
+      <span style="color:rgba(234,227,216,0.75)">Sesión de 45 min · $89.990</span>
+      <span style="color:rgba(234,227,216,0.75)">Reserva con 48 h de anticipación</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px;font-size:14px">
+      <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#C9AE6A">Tiendas y retiros</p>
+      <span>Sede SPA</span>
+      <span>Costanera Center</span>
+      <span>Parque Arauco</span>
+      <sc-if value="{{ review }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;color:#C9AE6A">Direcciones, horarios y hora de corte por confirmar.</span></sc-if>
+    </div>
+  </div>
+  <div style="margin-top:10vh;padding-top:22px;border-top:1px solid rgba(234,227,216,0.16);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:12px;color:rgba(234,227,216,0.6)">
+    <span>© 2026 Premier Cosmetics Chile</span>
+    <span>Prototipo de diseño — no procesa pagos ni reservas reales.</span>
+  </div>
+</footer>
+
+<div data-k="rev" style="position:fixed;left:16px;bottom:16px;z-index:90;display:flex;flex-direction:column;align-items:flex-start;gap:8px">
+  <sc-if value="{{ review }}" hint-placeholder-val="{{ false }}">
+    <div style="width:min(340px,calc(100vw - 32px));max-height:46vh;overflow:auto;background:#FAF8F4;color:#22201C;border:1px solid rgba(34,32,28,0.15);border-radius:14px;padding:16px 18px;font-size:12px;line-height:1.55;box-shadow:0 30px 60px -30px rgba(34,32,28,0.4)">
+      <p style="margin:0 0 8px;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#7E6528">Pendientes antes de publicar</p>
+      <ul style="margin:0;padding-left:16px;display:grid;gap:5px">
+        <li>Stock, modo de uso y precauciones de los 4 productos.</li>
+        <li>Fotos individuales del sérum de ojos y la crema.</li>
+        <li>Volumen del sérum de ojos: la foto dice 30 ml y lo informado es 35 ml.</li>
+        <li>Despiece/modelo 3D del envase (escena 02).</li>
+        <li>Fotos lifestyle reales (escena 06).</li>
+        <li>Testimonios autorizados (escena 08, oculta).</li>
+        <li>Flat lay con etiquetas deformadas: reemplazar.</li>
+        <li>Licencias Canela / PP Neue Montreal: hoy se usan Bodoni Moda + Jost.</li>
+        <li>QA fotograma a fotograma de los 7 videos.</li>
+        <li>Direcciones y horarios de sede SPA y puntos de retiro.</li>
+      </ul>
+    </div>
+  </sc-if>
+  <button data-k="rev-btn" onClick="{{ toggleReview }}" aria-pressed="{{ review }}" style="background:#22201C;color:#FAF8F4;border:0;border-radius:999px;padding:10px 16px;min-height:40px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;opacity:0.88">{{ reviewLabel }}</button>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;reviewMode&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Prototipo&quot;},&quot;motion&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;completo&quot;,&quot;reducido&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;'auto'|'completo'|'reducido'&quot;,&quot;section&quot;:&quot;Prototipo&quot;},&quot;skipLoader&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Prototipo&quot;}}">
+class Component extends DCLogic {
+  state = { review: false, menu: false, mobile: false, compact: false };
+  rootRef = React.createRef();
+  HD = { hero: 300, detalle: 400, ingredientes: 420, liquido: 380, coleccion: 850, editorial: 200, premier: 180, final: 250 };
+  HM = { hero: 200, detalle: 250, ingredientes: 300, liquido: 260, coleccion: 640, editorial: 150, premier: 150, final: 180 };
+  SC = ['hero', 'detalle', 'ingredientes', 'liquido', 'coleccion', 'editorial', 'premier', 'final'];
+  GLW = { hero: [.75, 0, 1, 0], detalle: [.35, 1, .55, 0], ingredientes: [1, 1, 0, 1], liquido: [.5, 1, 0, .35], coleccion: [.2, 0, 0, 0], editorial: [.14, 0, 0, 0], premier: [.2, 0, 0, 0], final: [.85, 0, 1, 0] };
+
+  componentDidMount() {
+    this.mobile = window.innerWidth <= 820;
+    this.setState({ review: !!this.props.reviewMode, mobile: this.mobile, compact: window.innerWidth < 1200 });
+    this.boot();
+  }
+  componentDidUpdate(pp, ps) {
+    if (pp.reviewMode !== this.props.reviewMode) this.setState({ review: !!this.props.reviewMode });
+    if (ps.review !== this.state.review && window.ScrollTrigger && !this.reduced) requestAnimationFrame(() => window.ScrollTrigger.refresh());
+  }
+  componentWillUnmount() {
+    this.dead = true;
+    try { this.ctx && this.ctx.revert(); } catch (e) {}
+    try { this.lenis && this.lenis.destroy(); } catch (e) {}
+    if (window.gsap) { this._raf && gsap.ticker.remove(this._raf); this._tick && gsap.ticker.remove(this._tick); }
+    cancelAnimationFrame(this._glRaf);
+    this.renderer && this.renderer.dispose();
+    this.io && this.io.disconnect();
+    window.removeEventListener('resize', this._onResize);
+    window.removeEventListener('pointermove', this._onMove);
+    window.removeEventListener('scroll', this._onScroll);
+  }
+
+  $(k) { return this.rootRef.current && this.rootRef.current.querySelector('[data-k="' + k + '"]'); }
+  $$(k) { return this.rootRef.current ? Array.from(this.rootRef.current.querySelectorAll('[data-k="' + k + '"]')) : []; }
+  css(k, o) { this.$$(k).forEach(el => Object.assign(el.style, o)); }
+
+  async waitLibs() {
+    for (let i = 0; i < 160; i++) {
+      if (window.gsap && window.ScrollTrigger && window.Lenis && window.THREE) return true;
+      await new Promise(r => setTimeout(r, 50));
+    }
+    return !!(window.gsap && window.ScrollTrigger);
+  }
+
+  async boot() {
+    const dbg = (location.hash || '').slice(1);
+    const ok = await this.waitLibs();
+    if (this.dead || !this.rootRef.current) return;
+    this.dbg = dbg;
+    const pref = this.props.motion ?? 'auto';
+    this.reduced = !ok || pref === 'reducido' || (pref === 'auto' && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    this.fine = window.matchMedia('(pointer: fine)').matches && !this.mobile;
+    this.scrubs = new Set();
+    this.loadMedia();
+    this.layout();
+    if (this.reduced) this.staticMode();
+    else {
+      if (this.dbg !== 'noscroll') this.initScroll();
+      if (window.THREE && this.dbg !== 'nothree') { try { this.initThree(); } catch (e) { console.warn('three', e); } }
+      if (this.fine) this.initPointer();
+    }
+    this._onScroll = () => this.onScroll();
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._onResize = () => {
+      const m = window.innerWidth <= 820;
+      if (m !== this.mobile) window.location.reload();
+      if (m) { this.fitColeccion(); this.fitFinal(); }
+      if ((innerWidth < 1200) !== this.state.compact) this.setState({ compact: innerWidth < 1200 });
+      else if (this.renderer) { this.renderer.setSize(innerWidth, innerHeight, false); this.cam.aspect = innerWidth / innerHeight; this.cam.updateProjectionMatrix(); }
+    };
+    window.addEventListener('resize', this._onResize);
+    this.onScroll();
+    this.loader();
+  }
+
+  loadMedia() {
+    const vids = this.$$('h-fondo').concat(this.$$('h-vid'), this.$$('i-vid'), this.$$('l-vid'), this.$$('c-vid'), this.$$('f-vid'));
+    vids.forEach(v => {
+      v.muted = true; v.playsInline = true; v.pause();
+      if (['i-vid', 'l-vid', 'h-vid', 'h-fondo', 'c-vid'].includes(v.dataset.k)) { v._play = true; v._rate = (v.dataset.k === 'i-vid' || v.dataset.k === 'l-vid') ? 0.6 : 0.75; v.defaultPlaybackRate = v._rate; }
+      v._src = (this.mobile && v.dataset.mob) || v.dataset.desk;
+      if (!v.dataset.lazy) this.loadVid(v);
+    });
+    this.io = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) e.target.querySelectorAll('video[data-lazy]').forEach(v => this.loadVid(v));
+      else e.target.querySelectorAll('video').forEach(v => { if (v._play && !v.paused) v.pause(); });
+    }), { rootMargin: '120% 0px 120% 0px' });
+    this.SC.forEach(s => { const el = this.$('sec-' + s); el && this.io.observe(el); });
+    if (scrollY < innerHeight * 2.5) { this.setVT(this.$('h-vid'), 0); this.setVT(this.$('h-fondo'), 0); }
+  }
+  loadVid(v) {
+    if (v._loaded) return; v._loaded = true; v.preload = 'auto'; v.src = v._src; v.load();
+    // iOS Safari won't paint seeked frames until the video has played once
+    const prime = () => { const pr = v.play(); if (pr && pr.then) pr.then(() => { if (v._play && v._want) return; v.pause(); if (!v._play) this.scrubs.add(v); }).catch(() => {}); };
+    if (v.readyState >= 1) prime(); else v.addEventListener('loadedmetadata', prime, { once: true });
+    if (!this._unlock) { this._unlock = () => { this.$$('l-vid').concat(this.$$('c-vid'), this.$$('i-vid'), this.$$('f-vid'), this.$$('h-vid'), this.$$('h-fondo')).forEach(x => { if ((x._play || x._blocked) && x._want && x.paused) { x._play = true; x._blocked = false; x.loop = true; x.playbackRate = x._rate || 0.6; this.scrubs.delete(x); const p = x.play(); p && p.catch && p.catch(() => {}); } else if (x._loaded && x.readyState < 2) { const p = x.play(); p && p.then && p.then(() => { if (!x._want) x.pause(); }).catch(() => {}); } }); }; window.addEventListener('touchstart', this._unlock, { passive: true }); }
+    if (this.reduced) v.addEventListener('loadeddata', () => { try { v.currentTime = (v.duration || 9.9) * 0.5; } catch (e) {} }, { once: true });
+  }
+  setVT(v, p) {
+    if (!v) return;
+    if (v._blocked) v._want = p > -0.12 && p < 1.05;
+    if (v._play) {
+      // Ambient videos play natively (smooth, decoder-paced) at a slower rate instead of seek-scrubbing
+      const on = p > -0.12 && p < 1.05; v._want = on;
+      if (on && v.paused && !v._trying && !this.reduced) {
+        if (!v._loaded) this.loadVid(v);
+        v.loop = true; v.playbackRate = v._rate || 0.6; v._trying = true;
+        const pr = v.play();
+        if (pr && pr.then) pr.then(() => { v._trying = false; v.playbackRate = v._rate || 0.6; if (!v._want) v.pause(); })
+          .catch(() => { v._trying = false; v._play = false; v._blocked = true; v.loop = false; this.scrubs.add(v); }); // autoplay blocked (e.g. Low Power Mode) → scrub fallback
+        else v._trying = false;
+      } else if (!on && !v.paused) v.pause();
+      if (v._play) return;
+    }
+    v._p = Math.min(1, Math.max(0, p)); this.scrubs.add(v);
+  }
+  tickVideos() {
+    this.scrubs.forEach(v => {
+      if (v._play || v.readyState < 1 || v.seeking) return;
+      const d = v.duration || 9.96, t = v._p * (d - 0.06);
+      if (Math.abs(v.currentTime - t) > 0.035) { try { v.currentTime = t; } catch (e) {} }
+    });
+  }
+
+  layout() {
+    const m = this.mobile;
+    if (!this.reduced) this.SC.forEach(s => { const el = this.$('sec-' + s); if (el) el.style.height = (m ? this.HM : this.HD)[s] + 'vh'; });
+    if (!this.reduced && !m) {
+      this.$$('d-co').forEach(c => { c.style.top = '50%'; if (c.dataset.side === 'r') c.style.left = 'calc(50% + 15vh)'; else c.style.right = 'calc(50% + 15vh)'; });
+    }
+    if (!m) return;
+    this.css('h-vid', { objectFit: 'cover' });
+    this.css('h-img', { objectFit: 'cover' });
+    this.css('h-under', { objectFit: 'cover' });
+    this.css('h-par', { inset: '0' });
+    this.css('h-head', { flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'flex-start', top: '17vh', transform: 'none', color: '#FAF8F4', fontSize: '11.5vw', gap: '0px', left: '6vw', right: '6vw' });
+    this.css('h-line', { maxWidth: 'none', textAlign: 'left' });
+    this.css('h-eyebrow', { top: '12vh', left: '6vw', right: '6vw', textAlign: 'left', color: '#EAE3D8' });
+    this.css('h-ctas', { flexDirection: 'column', alignItems: 'stretch', bottom: '5vh', textAlign: 'center' });
+    this.css('d-shade', { display: 'none' });
+    this.$$('d-co').forEach(c => Object.assign(c.style, { top: 'auto', bottom: '9vh', left: '6vw', right: '6vw', transform: 'none', justifyContent: 'center', textAlign: 'center', flexDirection: 'row' }));
+    this.css('co-line', { display: 'none' }); this.css('co-dot', { display: 'none' });
+    this.$$('co-txt').forEach(t => { t.parentElement.style.padding = '0'; });
+    this.css('i-frame', { top: '0', bottom: '0', right: '0', width: '100%', borderRadius: '0' });
+    this.css('i-grad', { opacity: '1' });
+    this.css('i-text', { top: 'auto', bottom: '5vh', left: '6vw', right: '6vw', width: 'auto', justifyContent: 'flex-end', gap: '2vh' });
+    this.css('i-head', { fontSize: '9.5vw' });
+    this.$$('i-card').forEach(c => { c.style.padding = '10px 0'; });
+    this.css('l-frame', { width: '100%' });
+    this.css('l-left', { top: '16vh', left: '6vw', fontSize: '13vw' });
+    this.css('l-right', { top: 'auto', bottom: '12vh', right: '6vw', fontSize: '13vw' });
+    this.css('c-title', { flexDirection: 'column', alignItems: 'center', top: '18vh', bottom: '8vh', fontSize: '13vw', justifyContent: 'space-between' });
+    this.css('c-arch', { width: '56vw', height: '100vw', borderRadius: '28vw 28vw 0 0' });
+    this.$$('c-info').forEach(el => {
+      const ps = el.querySelectorAll(':scope > p'); if (ps[1]) ps[1].style.display = 'none';
+      const h = el.querySelector('h3'); h.style.fontSize = 'min(9vw, 40px)';
+      const dl = el.querySelector('dl'); Object.assign(dl.style, { padding: '8px 0', fontSize: '12.5px', gap: '6px 16px', lineHeight: '1.35' });
+      const pr = dl.querySelectorAll('dd'); if (pr[2]) pr[2].style.fontSize = '18px';
+      const b = el.querySelector('div > a'); if (b) Object.assign(b.style, { padding: '13px 22px', fontSize: '11px' });
+    });
+    this.css('c-tabs', { left: '0', right: '0', bottom: '12px', padding: '0 6vw', flexWrap: 'nowrap', overflowX: 'auto', scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' });
+    this.$$('c-tab').forEach(b => Object.assign(b.style, { whiteSpace: 'nowrap', flex: 'none', padding: '8px 14px', fontSize: '10px', letterSpacing: '0.14em' }));
+    this.css('rev', { left: 'auto', right: '12px', bottom: 'auto', top: '84px', alignItems: 'flex-end' });
+    this.css('rev-btn', { padding: '6px 12px', minHeight: '32px', fontSize: '9.5px', opacity: '0.8' });
+    this.fitColeccion();
+    this.css('c-outro', { flexDirection: 'column', gap: '4vh', textAlign: 'center' });
+    this.css('c-oarch', { width: '44vw', height: '62vw', borderRadius: '22vw 22vw 0 0' });
+    this.css('e-wrap', { gridTemplateColumns: 'minmax(0,1fr)', gridTemplateRows: '46vh auto', padding: '12vh 6vw 6vh', gap: '4vh' });
+    this.css('e-b', { display: 'none' });
+    this.css('e-head', { fontSize: '13vw' });
+    this.css('p-wrap', { padding: '12vh 5vw 5vh', gap: '3vh' });
+    this.css('p-head', { fontSize: '11vw' });
+    this.css('p-grid', { gridTemplateColumns: 'repeat(2,minmax(0,1fr))', gap: '10px' });
+    this.$$('p-in').forEach(c => { Object.assign(c.style, { minHeight: '0', padding: '18px', borderRadius: '20px', gap: '12px' }); c.querySelectorAll('p').forEach(p => { p.style.fontSize = '12.5px'; }); c.querySelector('h3').style.fontSize = '19px'; const s = c.querySelector('svg'); s.setAttribute('width', '30'); s.setAttribute('height', '30'); });
+    this.css('f-ctas', { flexDirection: 'column', alignItems: 'stretch', bottom: '16px', gap: '10px', textAlign: 'center' });
+    this.$$('f-ctas').forEach(w => w.querySelectorAll('a').forEach(a => { a.style.padding = '14px 24px'; }));
+    this.css('f-head', { fontSize: 'min(9vw, 40px)' });
+    this.fitFinal();
+    if (document.fonts) document.fonts.ready.then(() => { this.fitColeccion(); this.fitFinal(); });
+  }
+  fitFinal() {
+    if (!this.mobile) return;
+    const H = innerHeight, W = innerWidth, navB = 82;
+    const c = this.$('f-ctas'), h = this.$('f-head'); if (!c || !h) return;
+    const headTop = H - 16 - c.offsetHeight - 18 - h.offsetHeight;
+    h.style.top = headTop + 'px';
+    const ah = Math.max(120, headTop - 16 - navB), aw = Math.min(W * 0.88, ah * 0.95);
+    this.css('f-arch', { top: navB + 'px', height: ah + 'px', width: aw + 'px', borderRadius: (aw / 2) + 'px ' + (aw / 2) + 'px 0 0' });
+  }
+
+  fitColeccion() {
+    if (!this.mobile) return;
+    const W = innerWidth, H = innerHeight, navB = 78, tabsB = 12 + 40 + 14;
+    this.css('c-info', { left: '6vw', right: '6vw', width: 'auto', top: 'auto', bottom: tabsB + 'px', gap: '8px', justifyContent: 'flex-end' });
+    const infoH = Math.max(0, ...this.$$('c-info').map(e => e.offsetHeight));
+    const stTop = navB, stBot = tabsB + infoH + 14;
+    this.css('c-stage', { left: '0', right: '0', top: stTop + 'px', bottom: stBot + 'px' });
+    const avail = Math.max(120, H - stTop - stBot - 8);
+    const ch = Math.min(W * 0.74, avail), cw = Math.min(W * 0.56, ch * 0.76);
+    this.css('c-card', { width: cw + 'px', height: ch + 'px', marginLeft: -cw / 2 + 'px', marginTop: -ch / 2 + 'px', borderRadius: (cw / 2) + 'px ' + (cw / 2) + 'px 0 0' });
+    if (this.carA != null) this.setCarousel(this.carA);
+  }
+  staticMode() {
+    this.SC.forEach(s => { const el = this.$('sec-' + s); if (!el) return; el.style.height = 'auto'; const st = el.firstElementChild; st.style.position = 'relative'; st.style.height = '100vh'; });
+    this.css('c-intro', { visibility: 'hidden' });
+    this.css('c-outro', { visibility: 'hidden' });
+    this.css('l-wipe', { display: 'none' });
+    this.splitFinal(false);
+    this.setCarousel(0);
+    this.css('gl', { display: 'none' });
+  }
+
+  ease(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+
+  initScroll() {
+    const gsap = window.gsap, ST = window.ScrollTrigger;
+    gsap.registerPlugin(ST);
+    if (window.Lenis) {
+      this.lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true });
+      this.lenis.on('scroll', ST.update);
+      this._raf = t => this.lenis.raf(t * 1000);
+      gsap.ticker.add(this._raf);
+      gsap.ticker.lagSmoothing(0);
+      this.lenis.stop();
+    }
+    this._tick = () => this.tickVideos();
+    gsap.ticker.add(this._tick);
+    this.ctx = gsap.context(() => {
+      ['sceneHero', 'sceneDetalle', 'sceneIngredientes', 'sceneLiquido', 'sceneColeccion', 'sceneEditorial', 'scenePremier', 'sceneFinal'].forEach(f => {
+        try { this[f](); } catch (e) { console.error('[Premier] ' + f + ': ' + (e && e.message)); }
+      });
+    }, this.rootRef.current);
+  }
+
+  mk(key, onUpdate) {
+    const gsap = window.gsap;
+    const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: this.$('sec-' + key), start: 'top top', end: 'bottom bottom', scrub: 0.5, invalidateOnRefresh: true, onUpdate: onUpdate ? s => onUpdate(s.progress) : undefined } });
+    tl.to({}, { duration: 1 }, 0);
+    return tl;
+  }
+  archW() { return this.mobile ? innerWidth * 0.7 : innerHeight * 0.4; }
+  archH() { return this.mobile ? innerWidth * 0.7 / 0.558 : innerHeight * 0.72; }
+
+  sceneHero() {
+    const gsap = window.gsap, arch = this.$('h-arch'), vid = this.$('h-vid'), fondo = this.$('h-fondo');
+    const tl = this.mk('hero', p => { this.setVT(vid, vid && vid._play ? p : (p - 0.18) / 0.55); this.setVT(fondo, p); });
+    tl.to(this.$$('h-line'), { yPercent: -40, opacity: 0, stagger: 0.03, duration: 0.14 }, 0.2)
+      .to(this.$('h-ctas'), { opacity: 0, y: -24, duration: 0.1 }, 0.2)
+      .to(this.$('h-eyebrow'), { opacity: 0, duration: 0.1 }, 0.2)
+      .fromTo(vid, { scale: 1 }, { scale: 1.12, duration: 0.5 }, 0.2)
+      .to(vid, { scale: 1, duration: 0.22 }, 0.72)
+      .fromTo(arch, { width: '100%', height: '100%', borderTopLeftRadius: 0, borderTopRightRadius: 0 },
+        { width: () => this.archW(), height: () => this.archH(), borderTopLeftRadius: () => this.archW() / 2, borderTopRightRadius: () => this.archW() / 2, duration: 0.24, ease: 'power2.inOut', immediateRender: false }, 0.7)
+      .fromTo(this.$('h-img'), { opacity: 0 }, { opacity: 1, duration: 0.07 }, 0.91)
+      .fromTo(this.$('h-dark'), { opacity: 0 }, { opacity: 1, duration: 0.12 }, 0.86);
+  }
+  heroIntro() {
+    const gsap = window.gsap; if (!gsap || this.reduced) return;
+    const arch = this.$('h-arch');
+    gsap.fromTo(arch, { width: this.archW(), height: this.archH(), borderTopLeftRadius: this.archW() / 2, borderTopRightRadius: this.archW() / 2 },
+      { width: '100%', height: '100%', borderTopLeftRadius: 0, borderTopRightRadius: 0, duration: 1.7, ease: 'expo.inOut', clearProps: 'width,height,borderTopLeftRadius,borderTopRightRadius' });
+    gsap.from(this.$$('h-w'), { yPercent: 115, duration: 1.3, stagger: 0.07, ease: 'expo.out', delay: 0.9 });
+    gsap.from([this.$('h-eyebrow'), this.$('h-ctas')], { opacity: 0, y: 16, duration: 1, delay: 1.3, stagger: 0.15 });
+  }
+
+  sceneDetalle() {
+    const gsap = window.gsap, fr = this.$('d-frame'), img = this.$('d-img'), co = this.$$('d-co');
+    const vh = () => innerHeight, Y = (fy, s) => () => -(fy - 0.5) * vh() * s;
+    const S1 = this.mobile ? 1.3 : 1.5, S2 = this.mobile ? 1.45 : 1.7;
+    gsap.set(img, { xPercent: -50, yPercent: -50, x: 0, y: 0, transformOrigin: '50% 50%' });
+    co.forEach(c => { gsap.set(c, { opacity: 0 }); });
+    const coIn = c => { const t = gsap.timeline(); t.to(c, { opacity: 1, duration: 0.02 }).fromTo(c.querySelector('[data-k="co-line"]'), { scaleX: 0 }, { scaleX: 1, duration: 0.05 }).fromTo(c.querySelector('[data-k="co-txt"]'), { yPercent: 105 }, { yPercent: 0, duration: 0.05 }, '-=0.03'); return t; };
+    const coOut = c => gsap.timeline().to(c, { opacity: 0, duration: 0.04 });
+    const tl = this.mk('detalle');
+    tl.fromTo(fr, { width: () => this.archW(), height: () => this.archH(), borderTopLeftRadius: () => this.archW() / 2, borderTopRightRadius: () => this.archW() / 2 },
+      { width: () => innerWidth, height: () => innerHeight, borderTopLeftRadius: 0, borderTopRightRadius: 0, duration: 0.2, ease: 'power2.inOut' }, 0)
+      .fromTo(img, { scale: () => this.archH() / vh(), y: 0 }, { scale: S1, y: Y(0.29, S1), duration: 0.2, ease: 'power2.inOut' }, 0)
+      .fromTo(this.$('d-bg'), { opacity: 0 }, { opacity: 1, duration: 0.16, ease: 'power1.inOut' }, 0.04)
+      .fromTo(this.$('d-shade'), { opacity: 0 }, { opacity: 1, duration: 0.1 }, 0.1)
+      .fromTo(this.$('d-eyebrow'), { opacity: 0 }, { opacity: 1, duration: 0.06 }, 0.12)
+      .add(coIn(co[0]), 0.2).add(coOut(co[0]), 0.36)
+      .to(img, { scale: S2, y: Y(0.55, S2), duration: 0.12, ease: 'power2.inOut' }, 0.37)
+      .add(coIn(co[1]), 0.47).add(coOut(co[1]), 0.6)
+      .to(img, { y: Y(0.735, S2), duration: 0.1, ease: 'power2.inOut' }, 0.6)
+      .add(coIn(co[2]), 0.68).add(coOut(co[2]), 0.8)
+      .to(img, { scale: 1, y: 0, opacity: 0, filter: 'blur(10px)', duration: 0.18 }, 0.82)
+      .to(this.$('d-bg'), { opacity: 0, duration: 0.18 }, 0.82)
+      .to(this.$('d-eyebrow'), { opacity: 0, duration: 0.06 }, 0.86);
+  }
+
+  sceneIngredientes() {
+    const gsap = window.gsap, fr = this.$('i-frame'), vid = this.$('i-vid'), cards = this.$$('i-card');
+    const tl = this.mk('ingredientes', p => this.setVT(vid, (p - 0.1) / 0.75));
+    tl.fromTo(fr, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.18, ease: 'power2.out' }, 0)
+      .fromTo(this.$('i-eyebrow'), { opacity: 0 }, { opacity: 1, duration: 0.06 }, 0.03)
+      .fromTo(this.$$('i-w'), { yPercent: 115 }, { yPercent: 0, stagger: 0.015, duration: 0.1, ease: 'power3.out' }, 0.05);
+    cards.forEach((c, i) => {
+      const at = 0.24 + i * 0.13;
+      tl.fromTo(c, { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.08, ease: 'power2.out' }, at)
+        .fromTo(c.querySelector('[data-k="i-line"]'), { scaleX: 0 }, { scaleX: 1, duration: 0.1 }, at);
+    });
+    tl.to(this.$('i-text'), { opacity: 0, y: -60, duration: 0.14 }, 0.84)
+      .to(fr, { scale: 0.92, opacity: 0, duration: 0.14 }, 0.86);
+  }
+
+  sceneLiquido() {
+    const gsap = window.gsap, fr = this.$('l-frame'), vid = this.$('l-vid'), L = this.$('l-left'), R = this.$('l-right');
+    const coverS = () => this.mobile ? 1 : Math.max(innerWidth / (innerHeight * 0.5625), 1);
+    const tl = this.mk('liquido', p => this.setVT(vid, p / 0.85));
+    tl.fromTo(fr, { clipPath: 'inset(50% 0% 50% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.25, ease: 'power2.inOut' }, 0)
+      .fromTo(this.$('l-eyebrow'), { opacity: 0 }, { opacity: 1, duration: 0.06 }, 0.04)
+      .fromTo(L, { xPercent: -25, opacity: 0 }, { xPercent: 0, opacity: 1, duration: 0.18 }, 0.06)
+      .fromTo(R, { xPercent: 25, opacity: 0 }, { xPercent: 0, opacity: 1, duration: 0.18 }, 0.06)
+      .to(fr, { scale: coverS, duration: 0.45, ease: 'power1.inOut' }, 0.3)
+      .to(L, { xPercent: -50, opacity: 0, duration: 0.3 }, 0.38)
+      .to(R, { xPercent: 50, opacity: 0, duration: 0.3 }, 0.38)
+      .to(this.$('l-eyebrow'), { opacity: 0, duration: 0.06 }, 0.6)
+      .fromTo(this.$('l-wipe'), { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.18, ease: 'power2.inOut' }, 0.82);
+  }
+
+  sceneColeccion() {
+    const gsap = window.gsap, intro = this.$('c-intro'), car = this.$('c-car'), outro = this.$('c-outro'), vid = this.$('c-vid');
+    gsap.set(intro, { autoAlpha: 1 });
+    this.setCarousel(0);
+    const tl = this.mk('coleccion', p => { this.setVT(vid, vid && vid._play ? p : p / 0.12); this.setCarousel(this.segA(p)); });
+    tl.fromTo(this.$('c-arch'), { yPercent: 35, clipPath: 'inset(100% 0% 0% 0%)' }, { yPercent: 0, clipPath: 'inset(0% 0% 0% 0%)', duration: 0.07, ease: 'power2.out' }, 0)
+      .fromTo(intro, { autoAlpha: 1, scale: 1 }, { autoAlpha: 0, scale: 0.96, duration: 0.04 }, 0.1)
+      .fromTo(car, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.04 }, 0.11)
+      .to(car, { autoAlpha: 0, duration: 0.04 }, 0.9)
+      .fromTo(outro, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 0.06 }, 0.92);
+  }
+  segA(p) {
+    const s = (p - 0.13) / 0.77 * 4;
+    if (s <= 0) return 0; if (s >= 3.5) return 3;
+    const i = Math.floor(s), f = s - i;
+    return i + (f > 0.5 ? this.ease((f - 0.5) / 0.5) : 0);
+  }
+  setCarousel(a) {
+    this.carA = a;
+    const vw = innerWidth, m = this.mobile;
+    this.$$('c-card').forEach((c, k) => {
+      const d = k - a, ad = Math.abs(d);
+      const x = d * (m ? 0.6 : 0.22) * vw, z = -ad * (m ? 240 : 360), r = Math.max(-38, Math.min(38, -d * 24)), s = 1 + Math.max(0, 1 - ad) * 0.06;
+      c.style.transform = 'translate3d(' + x + 'px,0,' + z + 'px) rotateY(' + r + 'deg) scale(' + s + ')';
+      c.style.opacity = Math.max(0, 1 - ad * 0.4);
+      c.style.filter = 'blur(' + (Math.min(ad, 2) * 3).toFixed(2) + 'px)';
+      c.style.zIndex = String(10 - Math.round(ad * 2));
+      c.tabIndex = ad < 0.5 ? 0 : -1;
+    });
+    this.$$('c-info').forEach((el, k) => {
+      const o = Math.max(0, 1 - Math.abs(a - k) * 2.6);
+      el.style.opacity = o; el.style.transform = 'translateY(' + ((k - a) * 30) + 'px)';
+      el.style.visibility = o < 0.02 ? 'hidden' : 'visible';
+    });
+    const act = Math.round(a);
+    this.$$('c-tab').forEach((b, k) => {
+      const on = k === act;
+      b.style.background = on ? '#22201C' : 'transparent'; b.style.color = on ? '#FAF8F4' : '#22201C';
+      b.style.borderColor = on ? '#22201C' : 'rgba(34,32,28,0.25)'; b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+
+  sceneEditorial() {
+    const gsap = window.gsap;
+    const tl = this.mk('editorial');
+    tl.fromTo(this.$('e-a'), { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.3, ease: 'power2.out' }, 0)
+      .fromTo(this.$('e-a-img'), { scale: 1.25 }, { scale: 1, duration: 0.45 }, 0)
+      .fromTo(this.$$('e-w'), { yPercent: 115 }, { yPercent: 0, stagger: 0.03, duration: 0.12, ease: 'power3.out' }, 0.28)
+      .fromTo(this.$('e-b'), { clipPath: 'inset(0% 0% 100% 0%)', y: 60 }, { clipPath: 'inset(0% 0% 0% 0%)', y: -30, duration: 0.45 }, 0.3)
+      .fromTo(this.$('e-copy'), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.1 }, 0.45)
+      .to(this.$('e-wrap'), { y: () => -innerHeight * 0.08, opacity: 0, duration: 0.22 }, 0.78);
+  }
+
+  scenePremier() {
+    const gsap = window.gsap;
+    const tl = this.mk('premier');
+    tl.fromTo(this.$$('p-w'), { yPercent: 115 }, { yPercent: 0, stagger: 0.03, duration: 0.12, ease: 'power3.out' }, 0)
+      .fromTo(this.$$('p-card'), { opacity: 0, y: 70 }, { opacity: 1, y: 0, stagger: 0.08, duration: 0.16, ease: 'power2.out' }, 0.16)
+      .fromTo(this.$$('p-ico'), { strokeDashoffset: 100 }, { strokeDashoffset: 0, stagger: 0.04, duration: 0.2 }, 0.2)
+      .to(this.$('p-wrap'), { opacity: 0, y: -40, duration: 0.1 }, 0.9);
+  }
+
+  splitFinal(anim) {
+    const src = this.$('f-src'), out = this.$('f-chars');
+    if (!src || !out || out.childNodes.length) return [];
+    const parts = [];
+    src.childNodes.forEach(n => { const it = n.nodeType === 3 ? false : true; (n.textContent || '').split('').forEach(ch => parts.push([ch, it])); });
+    let word = null;
+    parts.forEach(([ch, it]) => {
+      if (ch === ' ') { word = null; out.appendChild(document.createTextNode(' ')); return; }
+      if (!word) { word = document.createElement('span'); word.style.display = 'inline-block'; word.style.whiteSpace = 'nowrap'; out.appendChild(word); }
+      const w = document.createElement('span'); w.style.display = 'inline-block'; w.style.overflow = 'hidden'; w.style.verticalAlign = 'top'; w.style.padding = '0 0.02em 0.08em'; w.style.margin = '0 -0.02em';
+      const s = document.createElement('span'); s.style.display = 'inline-block'; if (it) s.style.fontStyle = 'italic';
+      s.textContent = ch; s.setAttribute('data-ch', '1'); w.appendChild(s); word.appendChild(w);
+    });
+    src.style.display = 'none';
+    return Array.from(out.querySelectorAll('[data-ch]'));
+  }
+  sceneFinal() {
+    const gsap = window.gsap, vid = this.$('f-vid');
+    const chars = this.splitFinal(true);
+    const tl = this.mk('final', p => this.setVT(vid, p));
+    tl.fromTo(this.$('f-arch'), { yPercent: 25, clipPath: 'inset(100% 0% 0% 0%)' }, { yPercent: 0, clipPath: 'inset(0% 0% 0% 0%)', duration: 0.4, ease: 'power2.out' }, 0)
+      .fromTo(chars, { yPercent: 115 }, { yPercent: 0, stagger: 0.011, duration: 0.1, ease: 'power3.out' }, 0.4)
+      .fromTo(this.$('f-ctas'), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.12 }, 0.76);
+  }
+
+  onScroll() {
+    const mid = innerHeight * 0.5; let cur = 'hero';
+    for (const s of this.SC) { const el = this.$('sec-' + s); if (!el) continue; const r = el.getBoundingClientRect(); if (r.top <= mid && r.bottom > mid) { cur = s; break; } if (r.top > mid) break; cur = s; }
+    if (cur === this.cur) return; this.cur = cur;
+    const dark = cur === 'detalle' || cur === 'ingredientes' || cur === 'liquido' || (this.mobile && cur === 'hero');
+    const nav = this.$('nav'), rail = this.$('rail'), logo = this.$('nav-logo');
+    if (nav) nav.style.color = dark ? '#FAF8F4' : '#22201C';
+    if (rail) rail.style.color = dark ? '#FAF8F4' : '#22201C';
+    if (logo) logo.style.filter = 'none';
+    const idx = this.SC.indexOf(cur);
+    this.$$('rail-t').forEach((t, i) => { t.style.opacity = i === idx ? '1' : '0'; });
+    this.$$('rail-b').forEach((b, i) => { b.style.width = i === idx ? '32px' : '14px'; b.style.opacity = i === idx ? '1' : '0.4'; });
+    this.$$('rail-i').forEach((a, i) => { if (i === idx) a.setAttribute('aria-current', 'step'); else a.removeAttribute('aria-current'); });
+  }
+
+  initPointer() {
+    const gsap = window.gsap, glow = this.$('glow');
+    const gx = gsap.quickTo(glow, 'x', { duration: 0.6, ease: 'power3' }), gy = gsap.quickTo(glow, 'y', { duration: 0.6, ease: 'power3' });
+    const par = [[this.$('h-par'), 14], [this.$('e-a-par'), 10], [this.$('e-b-par'), -18]].filter(p => p[0]).map(([el, a]) => [gsap.quickTo(el, 'x', { duration: 1, ease: 'power3' }), gsap.quickTo(el, 'y', { duration: 1, ease: 'power3' }), a]);
+    this.ptr = { x: 0, y: 0 };
+    this._onMove = e => {
+      gx(e.clientX); gy(e.clientY);
+      const nx = e.clientX / innerWidth - 0.5, ny = e.clientY / innerHeight - 0.5; this.ptr = { x: nx, y: ny };
+      par.forEach(([qx, qy, a]) => { qx(-nx * a); qy(-ny * a); });
+      const overUi = e.target.closest && e.target.closest('header,button,input,select,textarea,[role="dialog"]');
+      glow.style.opacity = overUi || this.loading ? '0' : '1';
+    };
+    window.addEventListener('pointermove', this._onMove, { passive: true });
+    this.$$('p-in').forEach(card => {
+      const rx = gsap.quickTo(card, 'rotationX', { duration: 0.6 }), ry = gsap.quickTo(card, 'rotationY', { duration: 0.6 });
+      gsap.set(card, { transformPerspective: 900 });
+      card.addEventListener('pointermove', e => { const r = card.getBoundingClientRect(); ry(((e.clientX - r.left) / r.width - 0.5) * 8); rx(-((e.clientY - r.top) / r.height - 0.5) * 8); });
+      card.addEventListener('pointerleave', () => { rx(0); ry(0); });
+    });
+    this.rootRef.current.querySelectorAll('[data-mag]').forEach(b => {
+      const mx = gsap.quickTo(b, 'x', { duration: 0.5, ease: 'power3' }), my = gsap.quickTo(b, 'y', { duration: 0.5, ease: 'power3' });
+      b.addEventListener('pointermove', e => { const r = b.getBoundingClientRect(); mx((e.clientX - r.left - r.width / 2) * 0.12); my((e.clientY - r.top - r.height / 2) * 0.18); });
+      b.addEventListener('pointerleave', () => { mx(0); my(0); });
+    });
+  }
+
+  initThree() {
+    const T = window.THREE, cv = this.$('gl');
+    const r = new T.WebGLRenderer({ canvas: cv, alpha: true, antialias: false, powerPreference: 'low-power' });
+    const pix = Math.min(window.devicePixelRatio || 1, 1.5);
+    r.setPixelRatio(pix); r.setSize(innerWidth, innerHeight, false);
+    const scene = new T.Scene(), cam = new T.PerspectiveCamera(50, innerWidth / innerHeight, 0.1, 50);
+    cam.position.z = 6;
+    this.renderer = r; this.cam = cam;
+    const vs = 'attribute float aSize;attribute float aSeed;uniform float uScroll;uniform float uPix;varying float vSeed;void main(){vec3 p=position;p.y=mod(p.y+uScroll*(0.35+aSeed*0.65)+5.0,10.0)-5.0;p.x+=sin(uScroll*0.7+aSeed*6.283)*0.18;vec4 mv=modelViewMatrix*vec4(p,1.0);gl_PointSize=aSize*uPix*(6.0/-mv.z);gl_Position=projectionMatrix*mv;vSeed=aSeed;}';
+    const fs = 'uniform float uOpacity;uniform float uClear;uniform vec2 uRes;uniform float uRing;uniform float uDark;varying float vSeed;void main(){vec2 c=gl_PointCoord-0.5;float d=length(c);float a;if(uRing>0.5){a=smoothstep(0.5,0.44,d)*(0.10+0.55*smoothstep(0.28,0.47,d));a+=smoothstep(0.16,0.0,length(c-vec2(-0.15,-0.15)))*0.55;}else{a=smoothstep(0.5,0.0,d);a*=a;}vec2 uv=gl_FragCoord.xy/uRes;float cd=length((uv-0.5)*vec2(uRes.x/uRes.y,1.0));a*=mix(1.0,smoothstep(0.16,0.42,cd),uClear);vec3 gold=vec3(0.72,0.60,0.31);vec3 cream=vec3(0.97,0.91,0.78);vec3 col=mix(gold,cream,vSeed*mix(0.25,1.0,uDark));gl_FragColor=vec4(col,a*uOpacity);}';
+    const make = (n, smin, smax, ring) => {
+      const g = new T.BufferGeometry(), pos = new Float32Array(n * 3), sz = new Float32Array(n), sd = new Float32Array(n);
+      for (let i = 0; i < n; i++) { pos[i * 3] = (Math.random() - 0.5) * 14; pos[i * 3 + 1] = (Math.random() - 0.5) * 10; pos[i * 3 + 2] = -Math.random() * 7 + 2; sz[i] = smin + Math.pow(Math.random(), 2.2) * (smax - smin); sd[i] = Math.random(); }
+      g.setAttribute('position', new T.BufferAttribute(pos, 3)); g.setAttribute('aSize', new T.BufferAttribute(sz, 1)); g.setAttribute('aSeed', new T.BufferAttribute(sd, 1));
+      const mat = new T.ShaderMaterial({ vertexShader: vs, fragmentShader: fs, transparent: true, depthWrite: false, uniforms: { uScroll: { value: 0 }, uPix: { value: pix }, uOpacity: { value: 0 }, uClear: { value: 0 }, uRes: { value: new T.Vector2(innerWidth * pix, innerHeight * pix) }, uRing: { value: ring }, uDark: { value: 0 } } });
+      const pts = new T.Points(g, mat); scene.add(pts); return mat;
+    };
+    const dust = make(this.mobile ? 360 : 900, 1.6, 7, 0), bub = make(this.mobile ? 26 : 60, 16, 64, 1);
+    this.glMats = [dust, bub];
+    const w = { o: 0.5, d: 0, c: 0.6, b: 0 }, cp = { x: 0, y: 0 };
+    let last = '';
+    const loop = () => {
+      this._glRaf = requestAnimationFrame(loop);
+      if (document.hidden) return;
+      const tgt = this.loading ? [0.55, 0, 0.7, 0] : (this.GLW[this.cur] || this.GLW.hero);
+      w.o += (tgt[0] - w.o) * 0.06; w.d += (tgt[1] - w.d) * 0.06; w.c += (tgt[2] - w.c) * 0.06; w.b += (tgt[3] - w.b) * 0.05;
+      const p = this.ptr || { x: 0, y: 0 }; cp.x += (p.x * 0.5 - cp.x) * 0.05; cp.y += (-p.y * 0.35 - cp.y) * 0.05;
+      cam.position.x = cp.x; cam.position.y = cp.y; cam.lookAt(0, 0, -2);
+      const sc = window.scrollY / innerHeight * 0.55;
+      const key = [w.o, w.d, w.c, w.b, cp.x, cp.y, sc].map(v => v.toFixed(3)).join();
+      if (key === last) return; last = key;
+      dust.uniforms.uScroll.value = sc; bub.uniforms.uScroll.value = sc * 0.6;
+      dust.uniforms.uOpacity.value = w.o; dust.uniforms.uDark.value = w.d; dust.uniforms.uClear.value = w.c;
+      bub.uniforms.uOpacity.value = w.b * 0.9; bub.uniforms.uDark.value = 1; bub.uniforms.uClear.value = 0;
+      [dust, bub].forEach(m => m.uniforms.uRes.value.set(innerWidth * pix, innerHeight * pix));
+      r.render(scene, cam);
+    };
+    loop();
+  }
+
+  imgReady(src) { return new Promise(res => { const i = new Image(); i.onload = i.onerror = () => res(); i.src = src; }); }
+  vidReady(v) { return new Promise(res => { if (!v) return res(); if (v.readyState >= 2) return res(); v.addEventListener('loadeddata', () => res(), { once: true }); v.addEventListener('error', () => res(), { once: true }); setTimeout(res, 12000); }); }
+
+  async loader() {
+    const gsap = window.gsap, L = this.$('loader'), logo = this.$('ld-logo'), bar = this.$('ld-bar'), pct = this.$('ld-pct');
+    this.loading = true;
+    let seen = null; try { seen = localStorage.getItem('premier-intro-v1'); } catch (e) {}
+    const quick = !!this.props.skipLoader || !!seen || this.reduced || !gsap;
+    try { const txt = await (await fetch('assets/logo-premier.svg')).text(); logo.innerHTML = txt; } catch (e) {}
+    const svg = logo.querySelector('svg');
+    if (svg) { svg.style.width = '100%'; svg.style.height = 'auto'; svg.style.display = 'block'; svg.setAttribute('aria-hidden', 'true'); }
+    const shapes = svg ? Array.from(svg.querySelectorAll('path,rect')) : [];
+    const tasks = [document.fonts ? document.fonts.ready : Promise.resolve(), this.imgReady('assets/web/hero-serum.jpg'), this.vidReady(this.$('h-vid')), this.vidReady(this.$('h-fondo'))];
+    let done = 0; const total = tasks.length;
+    const upd = () => { if (pct) pct.textContent = Math.round(done / total * 100) + ' %'; if (bar) bar.style.transform = 'scaleX(' + (done / total) + ')'; };
+    upd(); tasks.forEach(t => Promise.resolve(t).then(() => { done++; upd(); }));
+    const all = Promise.all(tasks);
+    let draw = Promise.resolve();
+    if (gsap) {
+      gsap.from(L.children, { opacity: 0, duration: 0.8, stagger: 0.1 });
+      if (!quick && shapes.length) {
+        shapes.forEach(p => { let l = 400; try { l = p.getTotalLength(); } catch (e) {} p.style.strokeDasharray = l; p.style.strokeDashoffset = l; p.style.fill = 'transparent'; p.style.stroke = '#7E6528'; p.style.strokeWidth = '0.7'; });
+        draw = new Promise(res => gsap.timeline({ onComplete: res }).to(shapes, { strokeDashoffset: 0, duration: 2, stagger: 0.025, ease: 'power2.inOut' }).to(shapes, { fill: '#B89A50', stroke: 'rgba(184,154,80,0)', duration: 0.7 }, '-=0.35'));
+      }
+    }
+    const timeout = new Promise(r => setTimeout(() => r('timeout'), quick ? 4000 : 9000));
+    const drawCap = Promise.race([draw, new Promise(r => setTimeout(r, 3400))]);
+    const res = await Promise.race([Promise.all([all, drawCap]), timeout]);
+    if (this._finished) return;
+    if (res === 'timeout') { const s = this.$('ld-slow'); if (s) s.style.display = 'flex'; await new Promise(r => { this._continue = r; }); }
+    this.finishLoader();
+  }
+  finishLoader() {
+    if (this._finished) return; this._finished = true;
+    try { localStorage.setItem('premier-intro-v1', '1'); } catch (e) {}
+    const L = this.$('loader'), gsap = window.gsap;
+    const end = () => { if (L) L.style.display = 'none'; this.loading = false; };
+    if (gsap) gsap.to(L, { opacity: 0, duration: 0.9, ease: 'power2.inOut', onComplete: end }); else end();
+    if (this.lenis) this.lenis.start();
+    this.heroIntro();
+    if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+  }
+
+  renderVals() {
+    return {
+      rootRef: this.rootRef,
+      review: this.state.review,
+      reviewLabel: this.state.review ? 'Modo revisión · activo' : 'Modo revisión',
+      menu: this.state.menu,
+      mobile: this.state.mobile,
+      desktop: !this.state.mobile,
+      wideNav: !this.state.compact,
+      compactNav: this.state.compact,
+      noop: e => e.preventDefault(),
+      toggleReview: () => this.setState(s => ({ review: !s.review })),
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      skipIntro: () => { if (this._continue) this._continue(); this.finishLoader(); },
+      continueIntro: () => { if (this._continue) this._continue(); this.finishLoader(); },
+      pickProduct: e => {
+        const k = +e.currentTarget.dataset.i;
+        if (this.reduced || !this.lenis) { this.setCarousel(k); return; }
+        const sec = this.$('sec-coleccion'); const span = sec.offsetHeight - innerHeight;
+        const p = 0.13 + (k + 0.3) / 4 * 0.77;
+        this.lenis.scrollTo(sec.offsetTop + p * span, { duration: 1.1 });
+      },
+      go: e => {
+        const href = e.currentTarget.getAttribute('href');
+        if (!href || href.charAt(0) !== '#') return;
+        e.preventDefault();
+        this.setState({ menu: false });
+        const t = document.querySelector(href); if (!t) return;
+        if (this.lenis) this.lenis.scrollTo(t, { duration: 1.4 }); else window.scrollTo({ top: t.offsetTop, behavior: this.reduced ? 'auto' : 'smooth' });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

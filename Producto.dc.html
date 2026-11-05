@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Producto — Premier Cosmetics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&amp;family=Jost:wght@300..600&amp;display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#FAF8F4;color:#22201C;-webkit-font-smoothing:antialiased}
+a{color:#7E6528;text-decoration:none}
+a:hover{color:#22201C}
+:focus-visible{outline:2px solid #B89A50;outline-offset:3px}
+</style>
+</helmet>
+<div style="min-height:100vh;font-family:'Jost',system-ui,sans-serif;color:#22201C;background:#FAF8F4">
+
+<header style="position:sticky;top:0;z-index:20;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(34,32,28,0.08)">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 4vw;flex-wrap:wrap">
+    <a href="Premier Inicio.dc.html" aria-label="Premier Cosmetics, inicio"><img src="assets/logo-premier.svg" alt="Premier Cosmetics" style="height:34px;width:auto;display:block"></a>
+    <nav aria-label="Principal" style="display:flex;gap:26px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;flex-wrap:wrap">
+      <a href="Premier Inicio.dc.html#coleccion" style="color:#22201C">Productos</a>
+      <a href="Premier Inicio.dc.html#coleccion" style="color:#22201C">Colecciones</a>
+      <a href="SPA Reserva.dc.html" style="color:#22201C">SPA</a>
+      <a href="Premier Inicio.dc.html#tiendas" style="color:#22201C">Tiendas y retiros</a>
+    </nav>
+    <div style="display:flex;gap:14px;align-items:center;white-space:nowrap">
+      <button onClick="{{ openBag }}" style="background:none;border:0;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#22201C;cursor:pointer;min-height:44px">Bolsa ({{ bagCount }})</button>
+      <a href="SPA Reserva.dc.html" style="color:#22201C;border:1px solid #22201C;border-radius:999px;padding:10px 18px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase">Reservar SPA</a>
+    </div>
+  </div>
+</header>
+
+<main style="max-width:1320px;margin:0 auto;padding:28px 4vw 96px">
+  <nav aria-label="Ruta" style="font-size:12px;letter-spacing:0.12em;color:#6B665D;display:flex;gap:8px;flex-wrap:wrap">
+    <a href="Premier Inicio.dc.html" style="color:#6B665D">Inicio</a><span aria-hidden="true">/</span>
+    <a href="Premier Inicio.dc.html#coleccion" style="color:#6B665D">Advanced Trufas</a><span aria-hidden="true">/</span>
+    <span style="color:#22201C">{{ p.name }}</span>
+  </nav>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:56px;margin-top:28px;align-items:start">
+    <div style="display:grid;grid-template-columns:72px minmax(0,1fr);gap:16px">
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ gallery }}" as="g" hint-placeholder-count="2">
+          <button onClick="{{ g.pick }}" aria-label="{{ g.label }}" aria-pressed="{{ g.active }}" style="padding:0;border:1px solid {{ g.border }};background:#EAE3D8;width:72px;aspect-ratio:46/62;overflow:hidden;position:relative;cursor:pointer;border-radius:36px 36px 0 0">
+            <img src="{{ g.src }}" alt="" style="position:absolute;max-width:none;width:{{ g.w }};height:{{ g.h }};left:{{ g.l }};top:{{ g.t }};object-fit:cover;object-position:{{ g.pos }}">
+          </button>
+        </sc-for>
+      </div>
+      <div style="position:relative;aspect-ratio:46/62;overflow:hidden;background:#EAE3D8;border-radius:999px 999px 0 0;max-height:78vh">
+        <img src="{{ main.src }}" alt="{{ main.alt }}" style="position:absolute;max-width:none;width:{{ main.w }};height:{{ main.h }};left:{{ main.l }};top:{{ main.t }};object-fit:cover;object-position:{{ main.pos }}">
+        <sc-if value="{{ review }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;left:14px;right:14px;bottom:14px;background:#22201C;color:#FAF8F4;font-size:12px;line-height:1.5;padding:10px 14px;border-radius:10px"><strong style="color:#C9AE6A;letter-spacing:0.14em">REVISIÓN · </strong>{{ p.imgNote }}</div>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:22px;position:sticky;top:96px">
+      <p style="margin:0;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#7E6528">Colección Advanced Trufas · AURARIUS Gold Elements</p>
+      <h1 style="margin:0;font-family:'Bodoni Moda',Georgia,serif;font-weight:400;font-size:clamp(40px,4.4vw,72px);line-height:1;letter-spacing:-0.02em">{{ p.name }}</h1>
+      <p style="margin:0;font-family:'Bodoni Moda',serif;font-style:italic;font-size:18px;color:#4A463F">{{ p.official }}</p>
+
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:18px 0;border-top:1px solid rgba(34,32,28,0.14);border-bottom:1px solid rgba(34,32,28,0.14)">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <span style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#6B665D">Precio</span>
+          <span style="font-family:'Bodoni Moda',serif;font-size:28px">{{ priceLabel }}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;text-align:right">
+          <span style="font-size:12px;letter-spacing:0.16em;text-transform:uppercase;color:#6B665D">Contenido</span>
+          <span style="font-size:18px">{{ p.vol }}</span>
+        </div>
+        <div style="flex-basis:100%;display:flex;align-items:center;gap:8px;font-size:14px;color:{{ stockColor }}"><span style="width:8px;height:8px;border-radius:50%;background:currentColor"></span>{{ stockLabel }}</div>
+      </div>
+
+      <sc-if value="{{ available }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:stretch">
+          <div role="group" aria-label="Cantidad" style="display:flex;align-items:center;border:1px solid rgba(34,32,28,0.25);border-radius:999px">
+            <button onClick="{{ dec }}" aria-label="Quitar uno" style="width:48px;height:52px;background:none;border:0;font-size:20px;cursor:pointer;color:#22201C">−</button>
+            <span aria-live="polite" style="min-width:28px;text-align:center;font-size:16px">{{ qty }}</span>
+            <button onClick="{{ inc }}" aria-label="Agregar uno" style="width:48px;height:52px;background:none;border:0;font-size:20px;cursor:pointer;color:#22201C">+</button>
+          </div>
+          <button onClick="{{ addToBag }}" style="flex:1;min-width:200px;background:#22201C;color:#FAF8F4;border:0;border-radius:999px;padding:0 28px;min-height:52px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer" style-hover="background:#7E6528">Agregar a la bolsa</button>
+        </div>
+        <p style="margin:0;font-size:13px;color:#6B665D">Compra como invitada. El total y el despacho se confirman antes de pagar.</p>
+      </sc-if>
+      <sc-if value="{{ soldOut }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <button disabled="" style="background:#EAE3D8;color:#6B665D;border:0;border-radius:999px;min-height:52px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase">Agotado</button>
+          <p style="margin:0;font-size:14px;color:#4A463F">Este producto no está disponible por ahora. Te sugerimos otros pasos de la colección más abajo.</p>
+        </div>
+      </sc-if>
+
+      <div style="display:flex;flex-direction:column">
+        <sc-for list="{{ sections }}" as="s" hint-placeholder-count="3">
+          <div style="border-bottom:1px solid rgba(34,32,28,0.14)">
+            <button onClick="{{ s.toggle }}" aria-expanded="{{ s.open }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;background:none;border:0;padding:18px 0;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;color:#22201C;cursor:pointer;min-height:44px"><span>{{ s.title }}</span><span aria-hidden="true">{{ s.sign }}</span></button>
+            <sc-if value="{{ s.open }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:0 0 18px;font-size:15px;line-height:1.65;color:#4A463F;text-wrap:pretty">{{ s.body }}</p>
+            </sc-if>
+          </div>
+        </sc-for>
+        <sc-if value="{{ review }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:14px;padding:14px 16px;border-radius:10px;background-image:repeating-linear-gradient(135deg,rgba(184,154,80,0.10) 0 1px,transparent 1px 12px);border:1px dashed rgba(126,101,40,0.5);font-size:12px;line-height:1.6;font-family:ui-monospace,Menlo,monospace;color:#4A463F">Pendiente de Premier: tipo de piel, modo de uso, precauciones y stock. Precio entregado por Bryan; en producción se lee del catálogo y se revalida en el servidor. No se publican hasta su validación.</div>
+        </sc-if>
+      </div>
+    </div>
+  </div>
+
+  <section aria-labelledby="op" style="margin-top:96px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:32px;align-items:start;padding-top:40px;border-top:1px solid rgba(34,32,28,0.14)">
+    <div>
+      <h2 id="op" style="margin:0 0 10px;font-family:'Bodoni Moda',serif;font-weight:400;font-size:32px">Opiniones</h2>
+      <p style="margin:0;font-size:15px;color:#4A463F">Aún no hay opiniones de este producto.</p>
+    </div>
+    <div>
+      <h2 style="margin:0 0 10px;font-family:'Bodoni Moda',serif;font-weight:400;font-size:32px">¿Necesitas orientación?</h2>
+      <p style="margin:0 0 14px;font-size:15px;color:#4A463F">Puedes consultar en tu próxima visita al SPA.</p>
+      <a href="SPA Reserva.dc.html" style="font-size:12px;letter-spacing:0.18em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px">Reservar SPA</a>
+    </div>
+  </section>
+
+  <section aria-labelledby="rel" style="margin-top:96px">
+    <h2 id="rel" style="margin:0 0 28px;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(32px,3vw,48px)">Completa tu <em>ritual</em></h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:24px">
+      <sc-for list="{{ related }}" as="r" hint-placeholder-count="3">
+        <a href="{{ r.href }}" style="display:flex;flex-direction:column;gap:14px;color:#22201C">
+          <div style="position:relative;aspect-ratio:46/62;overflow:hidden;background:#EAE3D8;border-radius:999px 999px 0 0">
+            <img src="{{ r.src }}" alt="{{ r.name }}" style="position:absolute;max-width:none;width:{{ r.w }};height:{{ r.h }};left:{{ r.l }};top:{{ r.t }};object-fit:cover;object-position:{{ r.pos }};transition:transform 0.8s" style-hover="transform:scale(1.04)">
+          </div>
+          <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline"><span style="font-family:'Bodoni Moda',serif;font-size:22px">{{ r.name }}</span><span style="font-size:13px;color:#6B665D">{{ r.vol }} · {{ r.price }}</span></div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+</main>
+
+<sc-if value="{{ bagOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeBag }}" style="position:fixed;inset:0;z-index:40;background:rgba(34,32,28,0.35)"></div>
+  <aside role="dialog" aria-label="Bolsa" style="position:fixed;top:0;right:0;bottom:0;z-index:41;width:min(440px,100vw);background:#FAF8F4;display:flex;flex-direction:column;box-shadow:-30px 0 60px -30px rgba(34,32,28,0.4)">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:22px 24px;border-bottom:1px solid rgba(34,32,28,0.12)">
+      <h2 style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:28px">Tu bolsa</h2>
+      <button onClick="{{ closeBag }}" style="background:none;border:1px solid #22201C;border-radius:999px;padding:8px 14px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer;min-height:40px;color:#22201C">Cerrar</button>
+    </div>
+    <div style="flex:1;overflow:auto;padding:12px 24px">
+      <sc-if value="{{ bagEmpty }}" hint-placeholder-val="{{ true }}">
+        <p style="margin:40px 0;font-size:15px;color:#4A463F;text-align:center">Tu bolsa está vacía.</p>
+      </sc-if>
+      <sc-for list="{{ bag }}" as="b" hint-placeholder-count="0">
+        <div style="display:flex;justify-content:space-between;gap:12px;padding:16px 0;border-bottom:1px solid rgba(34,32,28,0.1)">
+          <div><p style="margin:0;font-family:'Bodoni Moda',serif;font-size:19px">{{ b.name }}</p><p style="margin:4px 0 0;font-size:13px;color:#6B665D">{{ b.vol }} · Cantidad {{ b.qty }} · {{ b.lineTotal }}</p></div>
+          <button onClick="{{ b.remove }}" style="align-self:center;background:none;border:0;font-family:'Jost',sans-serif;font-size:12px;color:#7E6528;text-decoration:underline;cursor:pointer;min-height:44px">Quitar</button>
+        </div>
+      </sc-for>
+    </div>
+    <div style="padding:20px 24px 26px;border-top:1px solid rgba(34,32,28,0.12);display:grid;gap:10px;font-size:14px">
+      <div style="display:flex;justify-content:space-between"><span>Subtotal</span><span style="font-family:'Bodoni Moda',serif;font-size:18px">{{ subtotalLabel }}</span></div>
+      <div style="display:flex;justify-content:space-between;color:#4A463F"><span>Despacho o retiro</span><span>Se calcula antes de pagar</span></div>
+      <div style="display:flex;justify-content:space-between;color:#4A463F"><span>Saldo aplicado</span><span>Requiere iniciar sesión</span></div>
+      <button disabled="" style="margin-top:8px;background:#EAE3D8;color:#6B665D;border:0;border-radius:999px;min-height:52px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase">Checkout · siguiente fase</button>
+      <p style="margin:0;font-size:12px;color:#6B665D;text-align:center">Prototipo: no procesa pagos. Webpay Plus y Mercado Pago, pendientes de integración.</p>
+    </div>
+  </aside>
+</sc-if>
+
+<button onClick="{{ toggleReview }}" style="position:fixed;left:16px;bottom:16px;z-index:30;background:#22201C;color:#FAF8F4;border:0;border-radius:999px;padding:10px 16px;min-height:40px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;opacity:0.88">{{ reviewLabel }}</button>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;stock&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;disponible&quot;,&quot;agotado&quot;],&quot;default&quot;:&quot;disponible&quot;,&quot;tsType&quot;:&quot;'disponible'|'agotado'&quot;,&quot;section&quot;:&quot;Estados de prototipo&quot;},&quot;reviewMode&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Estados de prototipo&quot;}}">
+class Component extends DCLogic {
+  state = { qty: 1, bag: [], bagOpen: false, open: { desc: true }, img: 0, review: false, pid: 'serum-facial' };
+  P = {
+    'serum-facial': { name: 'Sérum facial', official: 'Advanced Truffles Brightening Face Lift Serum', vol: '50 ml', price: 549990, imgs: ['serum', 'set'], imgNote: 'Foto individual recibida (hero serum face lift.jpg).' },
+    'serum-ojos': { name: 'Sérum de ojos', official: 'Advanced Truffles Brightening Eye Serum', vol: '35 ml', price: 299990, imgs: ['eye', 'set'], imgNote: 'Recorte de la foto de conjunto; falta foto individual. La etiqueta de la foto dice 30 ML, Bryan informa 35 ml.' },
+    'crema-facial': { name: 'Crema facial', official: 'Advanced Truffles Brightening Face-lift Cream', vol: '60 ml', price: 549990, imgs: ['cream', 'set'], imgNote: 'Recorte de la foto de conjunto; falta foto individual.' },
+    'mascarilla-termal': { name: 'Mascarilla termal iluminadora', official: 'Advanced Truffles Brightening Thermal Mask', vol: '60 ml', price: 549990, imgs: ['mask', 'set'], imgNote: 'Textura generada: validar contra el producto real antes de publicar.' }
+  };
+  IMG = {
+    serum: { src: 'assets/web/hero-serum.jpg', w: '100%', h: '100%', l: '0', t: '0', pos: '50% 55%', alt: 'Sérum facial Advanced Trufas' },
+    set: { src: 'assets/web/coleccion-completa.jpg', w: '100%', h: '100%', l: '0', t: '0', pos: '50% 50%', alt: 'Los cuatro productos de la colección Advanced Trufas' },
+    eye: { src: 'assets/web/coleccion-completa.jpg', w: '260%', h: 'auto', l: '-104.7%', t: '-112.5%', pos: '50% 50%', alt: 'Sérum de ojos Advanced Trufas' },
+    cream: { src: 'assets/web/coleccion-completa.jpg', w: '290%', h: 'auto', l: '-0.75%', t: '-158.3%', pos: '50% 50%', alt: 'Crema facial Advanced Trufas' },
+    mask: { src: 'assets/web/macro-textura.jpg', w: '100%', h: '100%', l: '0', t: '0', pos: '50% 40%', alt: 'Mascarilla termal Advanced Trufas abierta junto a su textura' }
+  };
+  componentDidMount() {
+    let pid = 'serum-facial';
+    try { const q = new URLSearchParams(location.search).get('p'); if (q && this.P[q]) pid = q; } catch (e) {}
+    this.setState({ pid, review: !!this.props.reviewMode });
+  }
+  componentDidUpdate(pp) { if (pp.reviewMode !== this.props.reviewMode) this.setState({ review: !!this.props.reviewMode }); }
+  renderVals() {
+    const st = this.state, p = this.P[st.pid], soldOut = (this.props.stock ?? 'disponible') === 'agotado';
+    const gallery = p.imgs.map((k, i) => Object.assign({}, this.IMG[k], { active: i === st.img, border: i === st.img ? '#22201C' : 'transparent', label: 'Ver imagen ' + (i + 1), pick: () => this.setState({ img: i }) }));
+    const secDefs = [
+      { k: 'desc', title: 'Descripción', body: 'Parte del tratamiento completo Advanced Trufas: trufa blanca y negra, gran cantidad de minerales del Mar Muerto e ingredientes hidratantes, nutritivos y fortalecedores. Con un activo antienvejecimiento, fortificado con oro de 24 quilates y una infusión de trufa para una piel de aspecto luminoso, con piedras preciosas.' },
+      { k: 'ing', title: 'Ingredientes destacados', body: 'Trufa blanca y negra · Minerales del Mar Muerto · Oro 24 quilates · Piedras preciosas · Ingredientes hidratantes, nutritivos y fortalecedores.' },
+      { k: 'ent', title: 'Despacho y retiro', body: 'Despacho a todo Chile. Retiro gratuito en sede SPA, Costanera Center o Parque Arauco, disponible un día hábil después del pago confirmado. El costo y plazo del despacho se muestran antes de pagar.' },
+      { k: 'sal', title: 'Saldo de cliente', body: 'Si tienes saldo por una cancelación, puedes usarlo en productos o servicios al iniciar sesión.' }
+    ];
+    const sections = secDefs.map(s => ({ title: s.title, body: s.body, open: !!st.open[s.k], sign: st.open[s.k] ? '−' : '+', toggle: () => this.setState(o => ({ open: Object.assign({}, o.open, { [s.k]: !o.open[s.k] }) })) }));
+    const related = Object.keys(this.P).filter(k => k !== st.pid).map(k => Object.assign({}, this.IMG[this.P[k].imgs[0]], { name: this.P[k].name, vol: this.P[k].vol, price: '$' + this.P[k].price.toLocaleString('es-CL'), href: 'Producto.dc.html?p=' + k }));
+    const clp = n => '$' + Math.round(n).toLocaleString('es-CL');
+    const subtotal = st.bag.reduce((a, b) => a + b.price * b.qty, 0);
+    const bag = st.bag.map((b, i) => Object.assign({}, b, { lineTotal: clp(b.price * b.qty), remove: () => this.setState(o => ({ bag: o.bag.filter((_, j) => j !== i) })) }));
+    return {
+      p, gallery, priceLabel: clp(p.price), subtotalLabel: st.bag.length ? clp(subtotal) : '$0', relPrice: null, main: gallery[Math.min(st.img, gallery.length - 1)], sections, related, bag,
+      qty: st.qty, review: st.review, reviewLabel: st.review ? 'Modo revisión · activo' : 'Modo revisión',
+      available: !soldOut, soldOut,
+      stockLabel: soldOut ? 'Agotado' : 'Disponibilidad confirmada en el checkout',
+      stockColor: soldOut ? '#8A3B2E' : '#4A5D3A',
+      bagOpen: st.bagOpen, bagEmpty: st.bag.length === 0, bagCount: st.bag.reduce((a, b) => a + b.qty, 0),
+      inc: () => this.setState(o => ({ qty: Math.min(9, o.qty + 1) })),
+      dec: () => this.setState(o => ({ qty: Math.max(1, o.qty - 1) })),
+      addToBag: () => this.setState(o => {
+        const ex = o.bag.find(b => b.id === o.pid);
+        const bag = ex ? o.bag.map(b => b.id === o.pid ? Object.assign({}, b, { qty: b.qty + o.qty }) : b) : o.bag.concat([{ id: o.pid, name: p.name, vol: p.vol, price: p.price, qty: o.qty }]);
+        return { bag, bagOpen: true };
+      }),
+      openBag: () => this.setState({ bagOpen: true }),
+      closeBag: () => this.setState({ bagOpen: false }),
+      toggleReview: () => this.setState(o => ({ review: !o.review }))
+    };
+  }
+}
+</script>
+</body>
+</html>

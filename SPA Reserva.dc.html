@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Reservar SPA — Premier Cosmetics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..600;1,6..96,400..600&amp;family=Jost:wght@300..600&amp;display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;padding:0;background:#FAF8F4;color:#22201C;-webkit-font-smoothing:antialiased}
+a{color:#7E6528;text-decoration:none}
+a:hover{color:#22201C}
+:focus-visible{outline:2px solid #B89A50;outline-offset:3px}
+</style>
+</helmet>
+<div style="min-height:100vh;font-family:'Jost',system-ui,sans-serif;color:#22201C;background:#FAF8F4">
+
+<header style="position:sticky;top:0;z-index:20;background:rgba(250,248,244,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(34,32,28,0.08)">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 4vw;flex-wrap:wrap">
+    <a href="Premier Inicio.dc.html" aria-label="Premier Cosmetics, inicio"><img src="assets/logo-premier.svg" alt="Premier Cosmetics" style="height:34px;width:auto;display:block"></a>
+    <nav aria-label="Principal" style="display:flex;gap:26px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;flex-wrap:wrap">
+      <a href="Premier Inicio.dc.html#coleccion" style="color:#22201C">Productos</a>
+      <a href="SPA Reserva.dc.html" aria-current="page" style="color:#7E6528">SPA</a>
+      <a href="Premier Inicio.dc.html#tiendas" style="color:#22201C">Tiendas y retiros</a>
+    </nav>
+  </div>
+</header>
+
+<main style="max-width:1180px;margin:0 auto;padding:40px 4vw 110px">
+  <p style="margin:0 0 14px;font-size:12px;letter-spacing:0.26em;text-transform:uppercase;color:#7E6528">SPA Premier</p>
+  <h1 style="margin:0;font-family:'Bodoni Moda',Georgia,serif;font-weight:400;font-size:clamp(44px,5.4vw,96px);line-height:1;letter-spacing:-0.02em">Reserva tu <em>momento</em></h1>
+
+  <ol aria-label="Pasos de la reserva" style="list-style:none;margin:40px 0 44px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px">
+    <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+      <li aria-current="{{ s.current }}" style="display:flex;flex-direction:column;gap:10px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:{{ s.color }}">
+        <span style="height:2px;background:{{ s.bar }}"></span>
+        <span>{{ s.n }} · {{ s.label }}</span>
+      </li>
+    </sc-for>
+  </ol>
+
+  <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
+    <section aria-labelledby="t1" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:40px;align-items:center">
+      <div style="aspect-ratio:4/5;border-radius:999px 999px 0 0;overflow:hidden;background:#EAE3D8;background-image:repeating-linear-gradient(135deg,rgba(184,154,80,0.14) 0 1px,transparent 1px 14px);display:flex;align-items:center;justify-content:center;max-height:70vh">
+        <span style="font-family:ui-monospace,Menlo,monospace;font-size:12px;color:#6B665D;text-align:center;padding:24px">foto real de la sede SPA<br>pendiente</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:22px">
+        <h2 id="t1" style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(34px,3.4vw,56px);line-height:1.05">Sesión de SPA</h2>
+        <dl style="margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 28px;font-size:15px;padding:20px 0;border-top:1px solid rgba(34,32,28,0.14);border-bottom:1px solid rgba(34,32,28,0.14)">
+          <dt style="color:#6B665D">Duración</dt><dd style="margin:0">45 minutos</dd>
+          <dt style="color:#6B665D">Valor</dt><dd style="margin:0;font-family:'Bodoni Moda',serif;font-size:22px">$89.990</dd>
+          <dt style="color:#6B665D">Lugar</dt><dd style="margin:0">Sede SPA Premier</dd>
+          <dt style="color:#6B665D">Anticipación</dt><dd style="margin:0">Mínimo 48 horas</dd>
+        </dl>
+        <p style="margin:0;font-size:14px;line-height:1.6;color:#4A463F;max-width:46ch">La reserva se confirma con el pago completo. Si cancelas, el monto pagado queda como saldo durante un año para productos o servicios.</p>
+        <div><button onClick="{{ toStep2 }}" style="background:#22201C;color:#FAF8F4;border:0;border-radius:999px;padding:0 32px;min-height:54px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer" style-hover="background:#7E6528">Elegir fecha y hora</button></div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isStep2 }}" hint-placeholder-val="{{ false }}">
+    <section aria-labelledby="t2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:48px;align-items:start">
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+          <button onClick="{{ prevMonth }}" disabled="{{ prevDisabled }}" aria-label="Mes anterior" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(34,32,28,0.25);background:none;cursor:pointer;color:#22201C;font-size:16px">‹</button>
+          <h2 id="t2" aria-live="polite" style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:28px">{{ monthLabel }}</h2>
+          <button onClick="{{ nextMonth }}" disabled="{{ nextDisabled }}" aria-label="Mes siguiente" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(34,32,28,0.25);background:none;cursor:pointer;color:#22201C;font-size:16px">›</button>
+        </div>
+        <div aria-hidden="true" style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;font-size:11px;letter-spacing:0.14em;color:#6B665D;text-align:center;margin-bottom:6px">
+          <span>LU</span><span>MA</span><span>MI</span><span>JU</span><span>VI</span><span>SÁ</span><span>DO</span>
+        </div>
+        <div role="grid" aria-label="Calendario" style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px">
+          <sc-for list="{{ days }}" as="d" hint-placeholder-count="35">
+            <button onClick="{{ d.pick }}" disabled="{{ d.disabled }}" aria-label="{{ d.aria }}" aria-pressed="{{ d.selected }}" style="aspect-ratio:1/1;min-height:44px;border-radius:50%;border:1px solid {{ d.border }};background:{{ d.bg }};color:{{ d.color }};font-family:'Jost',sans-serif;font-size:15px;cursor:pointer;visibility:{{ d.vis }}">{{ d.label }}</button>
+          </sc-for>
+        </div>
+        <p style="margin:18px 0 0;font-size:13px;line-height:1.6;color:#6B665D">Reservas con al menos 48 horas de anticipación. Horarios en hora de Santiago.</p>
+      </div>
+      <div>
+        <h3 style="margin:0 0 6px;font-family:'Bodoni Moda',serif;font-weight:400;font-size:28px">{{ dayLabel }}</h3>
+        <p style="margin:0 0 20px;font-size:14px;color:#4A463F">{{ slotHint }}</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:8px">
+          <sc-for list="{{ slots }}" as="s" hint-placeholder-count="8">
+            <button onClick="{{ s.pick }}" disabled="{{ s.disabled }}" aria-pressed="{{ s.selected }}" aria-label="{{ s.aria }}" style="display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 6px;min-height:56px;border-radius:14px;border:1px solid {{ s.border }};background:{{ s.bg }};color:{{ s.color }};font-family:'Jost',sans-serif;cursor:pointer;text-decoration:{{ s.strike }}">
+              <span style="font-size:16px">{{ s.time }}</span><span style="font-size:11px;letter-spacing:0.06em;opacity:0.8">{{ s.note }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap">
+          <button onClick="{{ back }}" style="background:none;color:#22201C;border:1px solid rgba(34,32,28,0.3);border-radius:999px;padding:0 26px;min-height:52px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer">Volver</button>
+          <button onClick="{{ toStep3 }}" disabled="{{ noSlot }}" style="background:{{ ctaBg }};color:#FAF8F4;border:0;border-radius:999px;padding:0 30px;min-height:52px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer">Continuar</button>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isStep3 }}" hint-placeholder-val="{{ false }}">
+    <section aria-labelledby="t3" style="max-width:620px">
+      <h2 id="t3" style="margin:0 0 8px;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(30px,3vw,44px)">Tus datos</h2>
+      <p style="margin:0 0 28px;font-size:14px;line-height:1.6;color:#4A463F">Te enviaremos un enlace a tu correo para acceder a tu cuenta, gestionar la reserva y ver tu saldo.</p>
+      <form onSubmit="{{ submitData }}" novalidate="" style="display:grid;gap:18px">
+        <sc-for list="{{ fields }}" as="f" hint-placeholder-count="3">
+          <div style="display:grid;gap:6px">
+            <label for="{{ f.id }}" style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#4A463F">{{ f.label }}</label>
+            <input id="{{ f.id }}" name="{{ f.id }}" type="{{ f.type }}" autocomplete="{{ f.ac }}" value="{{ f.value }}" onChange="{{ f.onChange }}" aria-invalid="{{ f.invalid }}" aria-describedby="{{ f.errId }}" style="min-height:52px;padding:0 16px;border-radius:12px;border:1px solid {{ f.border }};background:#FFFFFF;font-family:'Jost',sans-serif;font-size:16px;color:#22201C">
+            <span id="{{ f.errId }}" role="alert" style="font-size:13px;color:#8A3B2E;min-height:1em">{{ f.error }}</span>
+          </div>
+        </sc-for>
+        <div style="display:flex;gap:12px;margin-top:8px;flex-wrap:wrap">
+          <button type="button" onClick="{{ back }}" style="background:none;color:#22201C;border:1px solid rgba(34,32,28,0.3);border-radius:999px;padding:0 26px;min-height:52px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer">Volver</button>
+          <button type="submit" style="background:#22201C;color:#FAF8F4;border:0;border-radius:999px;padding:0 30px;min-height:52px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer">Revisar y pagar</button>
+        </div>
+      </form>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isStep4 }}" hint-placeholder-val="{{ false }}">
+    <section aria-labelledby="t4" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:48px;align-items:start">
+      <div>
+        <h2 id="t4" style="margin:0 0 20px;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(30px,3vw,44px)">Resumen</h2>
+        <dl style="margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 28px;font-size:15px;padding:20px 0;border-top:1px solid rgba(34,32,28,0.14);border-bottom:1px solid rgba(34,32,28,0.14)">
+          <dt style="color:#6B665D">Tratamiento</dt><dd style="margin:0">Sesión de SPA · 45 min</dd>
+          <dt style="color:#6B665D">Fecha</dt><dd style="margin:0">{{ sumDate }}</dd>
+          <dt style="color:#6B665D">Hora</dt><dd style="margin:0">{{ sumTime }} (hora de Santiago)</dd>
+          <dt style="color:#6B665D">Lugar</dt><dd style="margin:0">Sede SPA Premier · dirección por confirmar</dd>
+          <dt style="color:#6B665D">A nombre de</dt><dd style="margin:0">{{ sumName }}</dd>
+        </dl>
+        <p style="margin:18px 0 0;font-size:13px;line-height:1.6;color:#4A463F">Política: la reserva se confirma solo con el 100 % pagado. Si cancelas, el monto pagado queda como saldo durante un año desde su acreditación, para productos o servicios.</p>
+        <p aria-live="polite" style="margin:14px 0 0;font-size:13px;color:#7E6528">Guardamos este horario mientras completas el pago · {{ holdLabel }}</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:grid;gap:10px;font-size:15px;padding:22px;border-radius:20px;background:#FFFFFF;border:1px solid rgba(34,32,28,0.1)">
+          <div style="display:flex;justify-content:space-between"><span>Sesión de SPA</span><span>$89.990</span></div>
+          <sc-if value="{{ hasBalance }}" hint-placeholder-val="{{ false }}">
+            <label style="display:flex;justify-content:space-between;gap:12px;align-items:center;cursor:pointer;min-height:44px">
+              <span style="display:flex;gap:10px;align-items:center"><input type="checkbox" checked="{{ useBalance }}" onChange="{{ toggleBalance }}" style="width:20px;height:20px;accent-color:#7E6528"><span>Usar saldo <span style="color:#6B665D;font-size:13px">({{ balanceLabel }} · vence {{ balanceExp }})</span></span></span>
+              <span>{{ balanceApplied }}</span>
+            </label>
+          </sc-if>
+          <div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid rgba(34,32,28,0.12);font-family:'Bodoni Moda',serif;font-size:24px"><span>Por pagar</span><span>{{ dueLabel }}</span></div>
+        </div>
+        <sc-if value="{{ needsGateway }}" hint-placeholder-val="{{ true }}">
+          <fieldset style="border:0;margin:0;padding:0;display:grid;gap:8px">
+            <legend style="font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#4A463F;margin-bottom:8px">Medio de pago</legend>
+            <sc-for list="{{ methods }}" as="m" hint-placeholder-count="2">
+              <label style="display:flex;align-items:center;gap:12px;padding:0 18px;min-height:56px;border-radius:14px;border:1px solid {{ m.border }};background:#FFFFFF;cursor:pointer">
+                <input type="radio" name="pay" checked="{{ m.checked }}" onChange="{{ m.pick }}" style="width:18px;height:18px;accent-color:#7E6528"><span style="font-size:15px">{{ m.label }}</span>
+              </label>
+            </sc-for>
+          </fieldset>
+        </sc-if>
+        <sc-if value="{{ payError }}" hint-placeholder-val="{{ false }}">
+          <div role="alert" style="padding:14px 16px;border-radius:12px;background:#F5E6E1;color:#8A3B2E;font-size:14px;line-height:1.5">El pago fue rechazado y no se confirmó la reserva. El horario quedó liberado; puedes intentarlo de nuevo o elegir otro.</div>
+        </sc-if>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button onClick="{{ back }}" style="background:none;color:#22201C;border:1px solid rgba(34,32,28,0.3);border-radius:999px;padding:0 26px;min-height:54px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer">Volver</button>
+          <button onClick="{{ pay }}" style="flex:1;min-width:200px;background:#22201C;color:#FAF8F4;border:0;border-radius:999px;padding:0 30px;min-height:54px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer" style-hover="background:#7E6528">{{ payLabel }}</button>
+        </div>
+        <p style="margin:0;font-size:12px;color:#6B665D">Prototipo: no se realiza ningún cobro. Webpay Plus y Mercado Pago, pendientes de integración.</p>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+    <section aria-labelledby="t5" role="status" style="max-width:640px;display:flex;flex-direction:column;gap:20px">
+      <p style="margin:0;font-size:12px;letter-spacing:0.24em;text-transform:uppercase;color:#7E6528">Reserva simulada · {{ bookingId }}</p>
+      <h2 id="t5" style="margin:0;font-family:'Bodoni Moda',serif;font-weight:400;font-size:clamp(36px,4vw,64px);line-height:1.05">Te esperamos el <em>{{ sumDate }}</em> a las {{ sumTime }}</h2>
+      <p style="margin:0;font-size:15px;line-height:1.65;color:#4A463F">Enviaremos la confirmación a {{ sumEmail }}. Desde tu cuenta podrás ver o cancelar la reserva; si cancelas, el monto queda como saldo por un año.</p>
+      <p style="margin:0;padding:14px 16px;border-radius:12px;background:#EAE3D8;font-size:13px;line-height:1.6">Esta es una confirmación de demostración. En producción, la reserva se confirma solo tras verificar el pago con el proveedor desde el servidor.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="Premier Inicio.dc.html" style="background:#22201C;color:#FAF8F4;border-radius:999px;padding:17px 28px;font-size:12px;letter-spacing:0.18em;text-transform:uppercase">Volver al inicio</a>
+        <button onClick="{{ restart }}" style="background:none;color:#22201C;border:1px solid rgba(34,32,28,0.3);border-radius:999px;padding:0 26px;min-height:52px;font-family:'Jost',sans-serif;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer">Nueva reserva</button>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ review }}" hint-placeholder-val="{{ false }}">
+    <aside style="margin-top:56px;padding:18px 20px;border-radius:14px;border:1px dashed rgba(126,101,40,0.55);background-image:repeating-linear-gradient(135deg,rgba(184,154,80,0.08) 0 1px,transparent 1px 12px);font-family:ui-monospace,Menlo,monospace;font-size:12px;line-height:1.7;color:#4A463F">
+      REVISIÓN · Simulado en este prototipo: horario de demostración lun–sáb 10:00–19:00 con inicios cada 30 min (horario real pendiente), citas existentes ficticias generadas por fecha, retención de 10 min (duración por definir), saldo de demo y resultado del pago (ver Tweaks). Reglas implementadas: 48 h corridas, capacidad máxima de 2 personas simultáneas calculada sobre toda la duración, zona America/Santiago.
+    </aside>
+  </sc-if>
+</main>
+
+<button onClick="{{ toggleReview }}" style="position:fixed;left:16px;bottom:16px;z-index:30;background:#22201C;color:#FAF8F4;border:0;border-radius:999px;padding:10px 16px;min-height:40px;font-family:'Jost',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;opacity:0.88">{{ reviewLabel }}</button>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;saldoDemo&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:0,&quot;min&quot;:0,&quot;max&quot;:200000,&quot;step&quot;:10000,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Estados de prototipo&quot;},&quot;pagoDemo&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;aprobado&quot;,&quot;rechazado&quot;],&quot;default&quot;:&quot;aprobado&quot;,&quot;tsType&quot;:&quot;'aprobado'|'rechazado'&quot;,&quot;section&quot;:&quot;Estados de prototipo&quot;},&quot;reviewMode&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Estados de prototipo&quot;}}">
+class Component extends DCLogic {
+  TZ = 'America/Santiago';
+  DUR = 45; PRICE = 89990; CAP = 2; OPEN = 10 * 60; CLOSE = 19 * 60; STEP = 30;
+  state = { step: 1, monthOff: 0, day: null, slot: null, form: { name: '', email: '', phone: '' }, errors: {}, method: 'webpay', useBalance: true, payError: false, review: false, holdEnd: 0, now: Date.now(), bookingId: '' };
+
+  componentDidMount() {
+    this.setState({ review: !!this.props.reviewMode });
+    this.timer = setInterval(() => { if (this.state.step === 4) this.setState({ now: Date.now() }); }, 1000);
+  }
+  componentWillUnmount() { clearInterval(this.timer); }
+  componentDidUpdate(pp) { if (pp.reviewMode !== this.props.reviewMode) this.setState({ review: !!this.props.reviewMode }); }
+
+  parts(t) {
+    const f = this._fmt || (this._fmt = new Intl.DateTimeFormat('en-US', { timeZone: this.TZ, year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', hourCycle: 'h23', weekday: 'short' }));
+    const o = {}; f.formatToParts(new Date(t)).forEach(p => { o[p.type] = p.value; });
+    return { y: +o.year, m: +o.month, d: +o.day, h: +o.hour, mi: +o.minute, wd: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].indexOf(o.weekday) };
+  }
+  zoned(y, m, d, mins) {
+    let g = Date.UTC(y, m - 1, d, Math.floor(mins / 60), mins % 60);
+    for (let i = 0; i < 2; i++) { const p = this.parts(g); const asUtc = Date.UTC(p.y, p.m - 1, p.d, p.h, p.mi); g = g - (asUtc - Date.UTC(y, m - 1, d, Math.floor(mins / 60), mins % 60)); }
+    return g;
+  }
+  key(y, m, d) { return y + '-' + String(m).padStart(2, '0') + '-' + String(d).padStart(2, '0'); }
+  bookings(y, m, d) {
+    let h = 0; const k = this.key(y, m, d); for (let i = 0; i < k.length; i++) h = (h * 31 + k.charCodeAt(i)) >>> 0;
+    const rnd = () => { h = (h * 1664525 + 1013904223) >>> 0; return h / 4294967296; };
+    const n = Math.floor(rnd() * 7), out = [];
+    for (let i = 0; i < n; i++) { const s = this.OPEN + Math.floor(rnd() * ((this.CLOSE - this.OPEN - this.DUR) / 15 + 1)) * 15; out.push([s, s + this.DUR]); }
+    return out;
+  }
+  freeCap(bk, s) {
+    const e = s + this.DUR, ov = bk.filter(b => b[0] < e && b[1] > s);
+    const pts = [s].concat(ov.map(b => b[0]).filter(t => t > s && t < e));
+    let worst = 0; pts.forEach(t => { const c = ov.filter(b => b[0] <= t && b[1] > t).length; if (c > worst) worst = c; });
+    return this.CAP - worst;
+  }
+  daySlots(y, m, d) {
+    const wd = this.parts(this.zoned(y, m, d, 12 * 60)).wd;
+    if (wd === 6) return [];
+    const bk = this.bookings(y, m, d), min = this.state.now + 48 * 3600 * 1000, out = [];
+    for (let s = this.OPEN; s + this.DUR <= this.CLOSE; s += this.STEP) {
+      const t = this.zoned(y, m, d, s), cap = this.freeCap(bk, s);
+      out.push({ s, t, cap, early: t < min });
+    }
+    return out;
+  }
+  fmtTime(mins) { return String(Math.floor(mins / 60)).padStart(2, '0') + ':' + String(mins % 60).padStart(2, '0'); }
+  clp(n) { return '$' + Math.round(n).toLocaleString('es-CL'); }
+
+  renderVals() {
+    const st = this.state, now = this.parts(st.now);
+    let ym = now.y * 12 + (now.m - 1) + st.monthOff; const Y = Math.floor(ym / 12), M = ym % 12 + 1;
+    const first = this.parts(this.zoned(Y, M, 1, 12 * 60)).wd, nd = new Date(Date.UTC(Y, M, 0)).getUTCDate();
+    const days = [];
+    for (let i = 0; i < first; i++) days.push({ label: '', vis: 'hidden', disabled: true, aria: '', selected: false, border: 'transparent', bg: 'transparent', color: '#22201C', pick: () => {} });
+    for (let d = 1; d <= nd; d++) {
+      const sl = this.daySlots(Y, M, d), ok = sl.some(x => !x.early && x.cap > 0), k = this.key(Y, M, d), sel = st.day === k;
+      days.push({ label: String(d), vis: 'visible', disabled: !ok, selected: sel, aria: d + ' de ' + new Intl.DateTimeFormat('es-CL', { month: 'long' }).format(new Date(Date.UTC(Y, M - 1, 15))) + (ok ? '' : ', sin horarios'),
+        border: sel ? '#22201C' : (ok ? 'rgba(34,32,28,0.18)' : 'transparent'), bg: sel ? '#22201C' : 'transparent', color: sel ? '#FAF8F4' : (ok ? '#22201C' : 'rgba(34,32,28,0.3)'),
+        pick: () => this.setState({ day: k, slot: null }) });
+    }
+    const mn = new Intl.DateTimeFormat('es-CL', { month: 'long', timeZone: 'UTC' }).format(new Date(Date.UTC(Y, M - 1, 15)));
+    const monthLabel = mn.charAt(0).toUpperCase() + mn.slice(1) + ' ' + Y;
+    let slots = [], dayLabel = 'Elige un día', slotHint = 'Los días disponibles aparecen destacados.';
+    let selDate = '', selTime = '';
+    if (st.day) {
+      const [y, m, d] = st.day.split('-').map(Number);
+      const sl = this.daySlots(y, m, d);
+      dayLabel = new Intl.DateTimeFormat('es-CL', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'UTC' }).format(new Date(Date.UTC(y, m - 1, d, 12)));
+      dayLabel = dayLabel.charAt(0).toUpperCase() + dayLabel.slice(1);
+      slotHint = 'Sesión de 45 minutos. Elige la hora de inicio.';
+      slots = sl.map(x => {
+        const dis = x.early || x.cap <= 0, sel = st.slot === x.s;
+        const note = x.early ? 'Antes de 48 h' : (x.cap <= 0 ? 'Completo' : (x.cap === 1 ? 'Último cupo' : 'Disponible'));
+        return { time: this.fmtTime(x.s), note, disabled: dis, selected: sel, aria: this.fmtTime(x.s) + ', ' + note,
+          border: sel ? '#22201C' : (dis ? 'rgba(34,32,28,0.08)' : 'rgba(34,32,28,0.2)'), bg: sel ? '#22201C' : (dis ? 'transparent' : '#FFFFFF'),
+          color: sel ? '#FAF8F4' : (dis ? 'rgba(34,32,28,0.35)' : '#22201C'), strike: x.cap <= 0 && !x.early ? 'line-through' : 'none',
+          pick: () => this.setState({ slot: x.s }) };
+      });
+      selDate = dayLabel; if (st.slot != null) selTime = this.fmtTime(st.slot);
+    }
+    const labels = ['Tratamiento', 'Fecha y hora', 'Tus datos', 'Pago'];
+    const steps = labels.map((l, i) => ({ n: String(i + 1).padStart(2, '0'), label: l, current: st.step === i + 1 ? 'step' : 'false', color: st.step >= i + 1 ? '#22201C' : '#9A958B', bar: st.step > i + 1 || st.step === 5 ? '#7E6528' : (st.step === i + 1 ? '#22201C' : 'rgba(34,32,28,0.14)') }));
+    const fdefs = [['name', 'Nombre y apellido', 'text', 'name'], ['email', 'Correo electrónico', 'email', 'email'], ['phone', 'Teléfono', 'tel', 'tel']];
+    const fields = fdefs.map(([id, label, type, ac]) => ({ id, label, type, ac, value: st.form[id], error: st.errors[id] || '', invalid: st.errors[id] ? 'true' : 'false', errId: id + '-err', border: st.errors[id] ? '#8A3B2E' : 'rgba(34,32,28,0.2)',
+      onChange: e => { const v = e.target.value; this.setState(o => ({ form: Object.assign({}, o.form, { [id]: v }), errors: Object.assign({}, o.errors, { [id]: '' }) })); } }));
+    const bal = Math.max(0, +(this.props.saldoDemo ?? 0));
+    const applied = st.useBalance ? Math.min(bal, this.PRICE) : 0, due = this.PRICE - applied;
+    const exp = new Date(st.now + 200 * 86400000);
+    const holdLeft = Math.max(0, st.holdEnd - st.now);
+    const methods = [['webpay', 'Webpay Plus · tarjetas de crédito y débito'], ['mp', 'Mercado Pago']].map(([k, l]) => ({ label: l, checked: st.method === k, border: st.method === k ? '#22201C' : 'rgba(34,32,28,0.15)', pick: () => this.setState({ method: k }) }));
+    return {
+      steps, isStep1: st.step === 1, isStep2: st.step === 2, isStep3: st.step === 3, isStep4: st.step === 4, isDone: st.step === 5,
+      days, monthLabel, prevDisabled: st.monthOff <= 0, nextDisabled: st.monthOff >= 2, slots, dayLabel, slotHint,
+      noSlot: st.slot == null, ctaBg: st.slot == null ? '#B8B2A7' : '#22201C',
+      fields, sumDate: selDate, sumTime: selTime, sumName: st.form.name, sumEmail: st.form.email,
+      hasBalance: bal > 0, useBalance: st.useBalance, balanceLabel: this.clp(bal) + ' disponible', balanceExp: exp.toLocaleDateString('es-CL'), balanceApplied: '−' + this.clp(applied),
+      dueLabel: this.clp(due), needsGateway: due > 0, methods, payError: st.payError,
+      payLabel: due > 0 ? 'Pagar ' + this.clp(due) : 'Confirmar con saldo',
+      holdLabel: holdLeft > 0 ? Math.floor(holdLeft / 60000) + ':' + String(Math.floor(holdLeft / 1000) % 60).padStart(2, '0') + ' min' : 'retención vencida, vuelve a elegir horario',
+      bookingId: st.bookingId,
+      review: st.review, reviewLabel: st.review ? 'Modo revisión · activo' : 'Modo revisión',
+      toStep2: () => this.setState({ step: 2 }),
+      toStep3: () => { if (st.slot != null) this.setState({ step: 3 }); },
+      back: () => this.setState(o => ({ step: Math.max(1, o.step - 1), payError: false })),
+      prevMonth: () => this.setState(o => ({ monthOff: Math.max(0, o.monthOff - 1) })),
+      nextMonth: () => this.setState(o => ({ monthOff: Math.min(2, o.monthOff + 1) })),
+      submitData: e => {
+        e.preventDefault(); const f = st.form, er = {};
+        if (f.name.trim().length < 3) er.name = 'Ingresa tu nombre y apellido.';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) er.email = 'Ingresa un correo válido.';
+        if (f.phone.replace(/\D/g, '').length < 8) er.phone = 'Ingresa un teléfono de al menos 8 dígitos.';
+        if (Object.keys(er).length) { this.setState({ errors: er }); const firstId = Object.keys(er)[0]; setTimeout(() => { const el = document.getElementById(firstId); el && el.focus(); }, 0); return; }
+        this.setState({ step: 4, holdEnd: Date.now() + 10 * 60000, payError: false });
+      },
+      toggleBalance: () => this.setState(o => ({ useBalance: !o.useBalance })),
+      pay: () => {
+        if (st.holdEnd < Date.now()) { this.setState({ step: 2, slot: null }); return; }
+        const [y, m, d] = st.day.split('-').map(Number);
+        if (this.zoned(y, m, d, st.slot) < Date.now() + 48 * 3600 * 1000) { this.setState({ step: 2, slot: null }); return; }
+        if ((this.props.pagoDemo ?? 'aprobado') === 'rechazado' && due > 0) { this.setState({ payError: true }); return; }
+        this.setState({ step: 5, bookingId: 'SPA-' + Math.random().toString(36).slice(2, 8).toUpperCase() });
+      },
+      restart: () => this.setState({ step: 1, day: null, slot: null, payError: false }),
+      toggleReview: () => this.setState(o => ({ review: !o.review }))
+    };
+  }
+}
+</script>
+</body>
+</html>
